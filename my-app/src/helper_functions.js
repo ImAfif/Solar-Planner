@@ -30,6 +30,13 @@ const operations_loss = function (crystaline_module) {
 }
 
 const power_plant_capacity = function () {
-  return dc_power_input_to_inverter() / operations_loss();
+  const loss = operations_loss() / 100;
+  return dc_power_input_to_inverter() / (1 - loss);
+}
+
+const inverter_estimated_rating = function() {
+  const assumption = 10
+  const safety_factor = assumption / 100
+  return dc_power_input_to_inverter() / (1 - safety_factor);
 }
 
