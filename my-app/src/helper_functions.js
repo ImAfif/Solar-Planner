@@ -2,6 +2,7 @@ const units_needed_per_day = 12;
 const sunshine_hours_per_day = 3.3;
 const crystaline_module = true;
 
+
 const power_needed_by_load = function (units_needed_per_day, sunshine_hours_per_day) {
 
   return units_needed_per_day / sunshine_hours_per_day
@@ -40,3 +41,16 @@ const inverter_estimated_rating = function() {
   return dc_power_input_to_inverter() / (1 - safety_factor);
 }
 
+const selected_modules = 1;
+const total_modules = function() {
+  return power_plant_capacity() / selected_modules[Vmp]
+}
+
+const selecter_inverters_from_db = function () {
+  if (inverter_estimated_rating() < )
+  return { inverters: }
+}
+
+const modules_in_string = function () {
+
+}
