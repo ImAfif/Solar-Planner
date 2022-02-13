@@ -50,13 +50,17 @@ const avg = function (a, b) {
 
 //Inverter Fake data
 const inverters = {
-  1: {'model name': 'model1', Vmax: 450, Vmpp: avg(120, 150), Imax: 12, Efficiency: 97},
-  2: {'model name': 'model2', Vmax: 400, Vmpp: avg(80, 100), Imax: 10, Efficiency: 98}
+  1: {'model name': 'model1', Vmax: 600, Vmpp: avg(400, 800), Imax: 35, Efficiency: 98.2, Pac: 17},//Pac in kva
+  2: {'model name': 'model2', Vmax: 400, Vmpp: avg(80, 100), Imax: 10, Efficiency: 98},
+  1: {'model name': 'model3', Vmax: 600, Vmpp: avg(100, 160), Imax: 75, Efficiency: 97.5, Pac: 10}
 }
 //modules fake data
 const modules = {
-  1: {'model name': 'model1', Pm: 380, Voc: 24, Isc: 10, Vm: 40, Im: 12, length: 6, breadth: 3},
-  2: {name: 'model2', Pm: 350, Voc: 24, Isc: 8, Vm: 39, Im: 10, length: 6, breadth: 3}
+  1: {'model name': 'model1', Pm: 210, Voc: 41.59, Isc: 7.13, Vm: 33.81, Im: 6.21 },
+  2: {'model name': 'model2', Pm: 350, Voc: 39, Isc: 8, Vm: 32, Im: 10 },
+  3: {'model name': 'model3', Pm: 145, Voc: 22.4, Isc: 8.5, Vm: 18.35, Im: 7.9 },
+  4: {'model name': 'model4', Pm: 240, Voc: 37.38, Isc: 8.45, Vm: 30.60, Im: 7.85 },
+  5: {'model name': 'model5', Pm: 150, Voc: 21.4, Isc: 7.5, Vm: 19.35, Im: 6.9 },
 }
 
 const inverter_estimated_rating = function() {
@@ -67,10 +71,7 @@ const inverter_estimated_rating = function() {
 console.log(inverter_estimated_rating());
 
 
-const selected_modules = function() {
-  
-  return ;
-}
+const selected_modules = { module: modules[3], module: modules[5]}
 
 const total_modules = function(selected_module) {
   return power_plant_capacity() / selected_module[Vm]
