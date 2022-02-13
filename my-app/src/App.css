@@ -1,38 +1,135 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  height: 75px;
+  background: #1a2e18;
+  width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.Login {
+  position: absolute;
+  float: right;
+  right: 5.5em;
+  font-size: 130%;
+  top: 25px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Register {
+  position: absolute;
+  float: right;
+  right: 11.5em;
+  font-size: 130%;
+  top: 25px;
+}
+
+.solar {
+  font-family: "Bungee Outline";
+  position: absolute;
+  left: 3em;
+  font-weight: bolder;
+  font-size: xx-large;
+  color: yellow;
+}
+
+.wrapper {
+  background: #efefef;
+  box-shadow: 1px 1px 10px #999;
+  margin: auto;
+  text-align: center;
+  position: relative;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin-bottom: 20px !important;
+  width: 95%;
+  padding-top: 5px;
+  margin-top: 6em;
+}
+.scrolls {
+  overflow-x: scroll;
+  height: 180px;
+  white-space: nowrap;
+}
+.imageDiv img {
+  box-shadow: 1px 1px 10px #999;
+  margin: 2px;
+  max-height: 50px;
+  cursor: pointer;
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  vertical-align: top;
+}
+
+.green-background {
+  left: 2em;
+  padding-left: 10px;
+  padding-right: 20em;
+  position: fixed;
+  background-color: #1a2e18;
+  color: yellow;
+}
+
+.Watts-select {
+  position: fixed;
+  left: 4em;
+  top: 34em;
+}
+
+.option {
+  position: fixed;
+  left: 3em;
+}
+
+.Watts {
+  position: fixed;
+  left: 3em;
+  top: 27em;
+}
+
+.energy {
+  display: flex;
+  position: fixed;
+  left: 4em;
+  top: 40em;
+}
+
+.Energy-required {
+  display: flex;
+  left: 3em;
+  position: fixed;
+  top: 32em;
+}
+
+.area {
+  display: flex;
+  position: fixed;
+  left: 4em;
+  top: 46em;
+}
+
+.Area-available {
+  display: flex;
+  left: 3em;
+  position: fixed;
+  top: 37em;
+}
+
+.price {
+  display: flex;
+  position: fixed;
+  left: 4em;
+  top: 52em;
+}
+
+.price-question {
+  display: flex;
+  left: 3em;
+  position: fixed;
+  top: 42em;
 }
