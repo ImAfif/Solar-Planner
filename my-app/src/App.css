@@ -81,24 +81,10 @@ nav {
   color: yellow;
 }
 
-.Watts-select {
-  position: relative;
-  left: 4em;
-  top: 34em;
-}
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
 
-.option {
-  position: relative;
-  left: 3em;
-}
-
-.Watts {
-  position: relative;
-  left: 3em;
-  top: 27em;
-}
-
-.energy {
   display: flex;
   position: relative;
   left: 4em;
