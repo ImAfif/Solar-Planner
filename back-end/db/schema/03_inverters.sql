@@ -1,8 +1,8 @@
 INSERT INTO inverters (
-  manufacturer,
-  model,
-  max_voltage(V),
-  VMpp_range_min(V),
-  VMpp_range_max(V),
-  peak_efficiency(%)
+  manufacturer varchar(255) NOT NULL,
+  model varchar(255) NOT NULL,
+  max_voltage(V) int NOT NULL,
+  VMpp_range_min(V) int NOT NULL,
+  VMpp_range_max(V) int NOT NULL,
+  peak_efficiency(%) int NOT NULL
 )

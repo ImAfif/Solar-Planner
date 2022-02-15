@@ -2,7 +2,7 @@ INSERT INTO solar_panel_tech (technology)
 VALUES ("Crystalline"), ("Thin-Film")
 
 INSERT INTO solar_panels (
-  type, manufacturer, model, max_power(Wp)Pm, max_current(A)Im, max_voltage(V)Vm, open_voltage(V)Voc, short_voltage(A)Isc, panel_area(㎡), price)
+  type, manufacturer, model, max_power(Wp)Pm, max_current(A), max_voltage(V), open_voltage(V), short_circuit_current(A), panel_area(㎡), price)
 VALUES
 (1, "Renogy", "Eclipse - 100 Watt", 100, 5.7, 600, 21.2, 6.1, 0.55, 219.99),
 (1, "Renogy", "175 Watt", 175, 15, 1000, 21.6, 10.35, .89, 259.99),
