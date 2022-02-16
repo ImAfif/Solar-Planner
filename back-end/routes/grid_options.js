@@ -16,7 +16,8 @@ module.exports = db => {
 
   //show user a list of their solar grid options
   router.get("/grid-options", (req, res) => {
-    db.query(`SELECT * FROM grid_options WHERE user_id = $1`, [user_id]).then(({ rows: grid_options }) => {
+    db.query(`SELECT * FROM grid_options WHERE user_id = $1`, [user_id])
+    .then(({ rows: grid_options }) => {
       res.json(
         grid_options.reduce (
           //impliment logic to pass gir option data to front end
@@ -41,9 +42,10 @@ module.exports = db => {
     const high_range = 0;
     const panel_type = ;
     const type = () => {
-      if(//location is near water))
+      if()
       panel_type += 1
     }
+
     if (req.body.watts == 1) {
       low_range = 150;
       high_range = 200;
@@ -65,6 +67,15 @@ module.exports = db => {
     .then(({ rows: solar_panels }) => {
       res.json(
         solar_panels.reduce (
+
+        )
+      )
+    })
+
+    db.query(`SELECT * FROM inverters`)
+    .then(({ rows: inverters }) => {
+      res.json(
+        inverters.reduce (
           //impliment logic to pass gir option data to front end
         )
       )

@@ -1,0 +1,9 @@
+Routes
+
+Users - authenticate
+Modules - giving the array of objects for selected or shortlisted modules
+Inverters - giving the array of objects for selected or shortlisted inverters
+grid_options - giving the array of objects for selected or shortlisted Combos.
+
+
+
