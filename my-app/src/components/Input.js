@@ -5,18 +5,18 @@ function input() {
       <div class="green-background">
         <h2>Input Form</h2>
       </div>
-      <span class="Watts">Choose your watts</span>
-      <select class="Watts-select" name="option">
+      <span class="Watts">Choose the panel wattage
+      </span>   
+      <select class="Watts-select" name="input_range">
         <option value="" disabled selected>
-          Choose your option
+          Choose panel wattage range
         </option>
-        <option value="1">150</option>
-        <option value="2">200</option>
-        <option value="3">250</option>
-        <option value="1">300</option>
-        <option value="2">350</option>
-        <option value="3">400</option>
-      </select>
+        <option value="1">150 - 200</option>
+        <option value="2">200 - 250 </option>
+        <option value="3">250 - 300</option>
+        <option value="4">300 - 350</option>
+        <option value="5">350 - 400</option>
+       </select>
       <p>
         <label class="Energy-required">Energy Required</label>
         <input class="energy" name="energy" type="text"></input>
