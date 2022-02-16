@@ -4,6 +4,7 @@ const crystalineModule = true;
 //const crystalineModule = false;
 const siteArea = 15;
 
+
 const powerNeededByLoad = function (units, hours) {
 
   return units / hours
@@ -141,10 +142,10 @@ const combinationCompatibility = function (module, inverter) {
 
 
 
-const total_strings = function(module, inverter) {
+const totalStrings = function(module, inverter) {
   return Math.ceil(totalModules(module) / modulesInString(module, inverter))
 }
-console.log("modules in parallel: ",total_strings(modules[3], inverters[1]))
+console.log("modules in parallel: ",totalStrings(modules[3], inverters[1]))
 
 
 const comboPrice = function (module, inverter) {
@@ -163,7 +164,7 @@ const combo = function(modules, inverters) {
       const seriesModules = modulesInString(module, inverter) 
       console.log(seriesModules)
       console.log('compatibility inside: ', combinationCompatibility(module, inverter))
-      const modulesInParallel = total_strings(module, inverter)
+      const modulesInParallel = totalStrings(module, inverter)
       //const results = {module, inverter, allNumberOfModules, seriesModules, modulesInParallel}
       const compatible = combinationCompatibility(module, inverter)
       const totalComboPrice = comboPrice(module, inverter)
@@ -181,7 +182,7 @@ return comboArray
 console.log('combo: ', combo(selectedModulesFromDb(inputRange), selectedInvertersFromDb()))
 
 
-
+exports.module = { powerNeededByLoad, acPowerOutputFromInverter, dcPowerInputToInverter, operationsLoss, powerPlantCapacity, inverterEstimatedRating, selectedModulesFromDb, selectedInvertersFromDb, totalModules, modulesInString, combinationCompatibility, totalStrings, comboPrice, combo }
 
 
 

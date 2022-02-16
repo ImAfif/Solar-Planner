@@ -1,13 +1,13 @@
 import React from "react";
-function input() {
+function Input() {
   return (
-    <div class="container">
-      <div class="green-background">
+    <div className="container">
+      <div className="input-form">
         <h2>Input Form</h2>
       </div>
-      <span class="Watts">Choose the panel wattage
+      <span className="Watts">Choose the panel wattage
       </span>   
-      <select class="Watts-select" name="input_range">
+      <select className="input-range" >
         <option value="" disabled selected>
           Choose panel wattage range
         </option>
@@ -18,21 +18,23 @@ function input() {
         <option value="5">350 - 400</option>
        </select>
       <p>
-        <label class="Energy-required">Energy Required</label>
-        <input class="energy" name="energy" type="text"></input>
+        <label className="Energy-required">Energy Required
+        <input className="energy" type="text" placeholder="Units per Day in kWh"></input>
+        </label>
       </p>
-      <p>
-        <label class="Area-available">
+      {/* <p>
+        <label className="Area-available">
           Amount of area available in metres squared
         </label>
-        <input class="area" name="area" type="text"></input>
-      </p>
-      <p>
-        <label class="price-question">Price</label>
-        <input class="price" name="price" type="text"></input>
-      </p>
+        <input className="area" name="area" type="text"></input>
+      </p> */}
+      <button className="calculate" href="/user/combo/:id">Calculate</button>
+      {/* <p>
+        <label className="price-question">Price</label>
+        <input className="price" name="price" type="text"></input>
+      </p> */}
     </div>
   );
 }
 
-export default input;
+export default Input;
