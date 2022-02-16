@@ -7,6 +7,9 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const session = require('express-session');
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -31,17 +34,36 @@ app.use(
   })
 );
 
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    key: "userId",
+    secret: "subscribe",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 60 * 60 * 24,
+    },
+  })
+);
+
 app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
+const solarPanelRoutes = require("./routes/solarpanels");
+const inverterRoutes = require("./routes/inverters");
+const gridOptionRoutes = require("./routes/grid-options");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
+app.use("/api/", usersRoutes(db));
+app.use("/api/solarpanels", solarPanelRoutes(db));
+app.use("/api/inverters", inverterRoutes(db));
+app.use("/api/grid-options", gridOptionRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
