@@ -1,14 +1,16 @@
 import React from "react";
 import Navigation from "./Navigation";
-import { powerNeededByLoad, acPowerOutputFromInverter, dcPowerInputToInverter, operationsLoss, powerPlantCapacity, inverterEstimatedRating, selectedModulesFromDb, selectedInvertersFromDb, totalModules, modulesInString, combinationCompatibility, totalStrings, comboPrice, combo } from '../helper_functions';
-import 
+//import { powerNeededByLoad, acPowerOutputFromInverter, dcPowerInputToInverter, operationsLoss, powerPlantCapacity, inverterEstimatedRating, selectedModulesFromDb, selectedInvertersFromDb, totalModules, modulesInString, combinationCompatibility, totalStrings, comboPrice, combo } from '../helper_functions';
 
-export default function Combo() {
+
+export default function Combo(props) {
+  
+  const { powerNeededByLoad, acPowerOutputFromInverter, dcPowerInputToInverter, operationsLoss, powerPlantCapacity, inverterEstimatedRating, selectedModulesFromDb, selectedInvertersFromDb, totalModules, modulesInString, combinationCompatibility, totalStrings, comboPrice, combo } = props;
 
   return (
     <>
     <Navigation />
-    <p>I am Combo component.</p>
+    <p>I am Combo component</p>
     <h4>  Power needed by load in kW = #{powerNeededByLoad}</h4>
     <h4>  AC power output from inverter = #{acPowerOutputFromInverter}</h4>
     <h4>  Input power to the inverter in kW = #{dcPowerInputToInverter}</h4>
