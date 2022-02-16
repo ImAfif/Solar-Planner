@@ -32,6 +32,8 @@ module.exports = (db) => {
           console.log(err);
         }
         if(result.length > 0) {
+          req.session.user = result;
+          console.log('req session:', req.session.user)
           res.send (result);
         } else {
           res.send({message: "Wrong username/password combination"})
