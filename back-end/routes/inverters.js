@@ -13,5 +13,10 @@ export default selectedInvertersFromDb = (db, inverterEstimatedRating) => {
   })
   });
 
+  router.put('/inverters', (req, res) => {
+    const
+  })
   return router
 }
+
+
