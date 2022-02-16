@@ -1,8 +1,7 @@
 const unitsNeededPerDay = 20;
-// google api gives lat and long, solcast api uses lata nad long to give available sunshine hours per day
-const sunshineHoursPerDay = 3.3;// number given from api
+const sunshineHoursPerDay = 3.3;
 const crystalineModule = true;
-//const crystaline_module = false;
+//const crystalineModule = false;
 const siteArea = 15;
 
 const powerNeededByLoad = function (units, hours) {
@@ -10,18 +9,18 @@ const powerNeededByLoad = function (units, hours) {
   return units / hours
 } 
 
-console.log(powerNeedByLoad(unitsNeededPerDay, sunshineHoursPer_day))
+console.log(powerNeededByLoad(unitsNeededPerDay, sunshineHoursPerDay))
 
 const acPowerOutputFromInverter = function() {
   const assumption = 5; // adding assumptions seprately to display them while displaying the function values, maybe below the displayed value
   const loss = assumption / 100;
- return (power_needed_by_load(unitsNeededPerDay, sunshineHoursPerDay) / (1 - loss))
+  return (powerNeededByLoad(unitsNeededPerDay, sunshineHoursPerDay) / (1 - loss))
 }
-P
-console.log(ac_PowerOutputFromInverter())
+
+console.log(acPowerOutputFromInverter())
 
 const dcPowerInputToInverter = function() {
-  const assumption =O;
+  const assumption = 5;
   const loss = assumption / 100;
   return acPowerOutputFromInverter() / (1 - loss)
 }
@@ -29,25 +28,26 @@ console.log('powert to inverter: ',dcPowerInputToInverter())
 
 
 const operationsLoss = function (crystalineModule) {
+
   if (!crystalineModule) {
-    return 15.5;L  }
+    return 15.5;
+  }
   return 19.25;
 }
-
-console.log('op loss: ', operationsLoss(crystalineModule))
+console.log('op loss: ',operationsLoss(crystalineModule))
 
 const powerPlantCapacity = function () {
   const loss = operationsLoss() / 100;
   return dcPowerInputToInverter() / (1 - loss);//.toFixed(1);//????????????
 }
-console.log("Plant capacity: ", powerPlantCapacity())
+console.log("Plant capacity: ",powerPlantCapacity())
 
-///////////PodulC& inverter selections 
+/////////// module & inverter selections 
 
-const avg = PunctIn (aTbI{
+const avg = function (a, b) {
   return (a + b) / 2;
 }
-CP
+
 //Inverter Fake data
 const inverters = {
   1: {'model name': 'model1', Vmax: 600, Vmpp: avg(400, 800), Imax: 35, Efficiency: 98.2, Pac: 5.6, Price: 1500},//Pac in kva
@@ -72,32 +72,32 @@ const inverterEstimatedRating = function() {
 }
 console.log("inverter capacity: ",inverterEstimatedRating());
 
-const input_range = 1;
+const inputRange = 1;
 
-//gives me sP of IduleTbIed user input
-const selectedModulesFromDb = function (input_range) { 
-  if (input_range === 1) {
+//gives me set of modules based user input
+const selectedModulesFromDb = function (inputRange) { 
+  if (inputRange === 1) {
     return Object.values(modules).filter(module => 
       module.Pm < 200 && module.Pm > 140)
   }
-  if (input_range === 2) {
+  if (inputRange === 2) {
     return Object.values(modules).filter(module => module.Pm < 250 && module.Pm > 200) 
   }
-  if (input_range === 3) {
+  if (inputRange === 3) {
   
     return Object.values(modules).filter(module => module.Pm < 300 && module.Pm > 250)
   }
-  if (input_range === 4) {
+  if (inputRange === 4) {
     return Object.values(modules).filter(module => module.Pm < 350 && module.Pm > 300)
 
   }
-  if (input_range === 5) {
+  if (inputRange === 5) {
     return Object.values(modules).filter(module => module.Pm < 400 && module.Pm > 350)
 
   }
 }
 
-console.log(selectedModulesFromDb(input_range))
+console.log(selectedModulesFromDb(inputRange))
  // module1: modules[3], module2: modules[5]} //from input range
  
  //gives me set of inverters I need
@@ -112,6 +112,8 @@ console.log(selectedModulesFromDb(input_range))
  }
  console.log(selectedInvertersFromDb())
 
+
+
 const totalModules = function(selectedModule) {
   return Math.ceil((powerPlantCapacity() * 1000) / selectedModule.Pm)
 }
@@ -119,64 +121,67 @@ console.log('total modules: ', totalModules(modules[3]))
 
 
 
-const modules_in_string = function(selectedModule, selectedInverters ) {
-  return Math.ceil(selected_inverters.Vmpp / selected_module.Vm)
+const modulesInString = function (selectedModule, selectedInverters ) {
+  return Math.ceil(selectedInverters.Vmpp / selectedModule.Vm)
 }
-Mconsole.log('modules in series: ' ,modules_in_string(modules[3], inverters[1]))
+console.log('modules in series: ' ,modulesInString(modules[3], inverters[1]))
 
 
 
-MISIconst combination_compatibiIty = function (module, iMerter) {
+const combinationCompatibility = function (module, inverter) {
   
-  if (modules_in_string(module, inverter) ImSule.Vm < inverter.Vmpp) {
+  if (modulesInString(module, inverter) * module.Vm < inverter.Vmpp) {
     return true //if changed Vmp is in range of the selected inverter's Vmp then fine else not compatible
 
   }
   return false
 }
 
-ISC//console.log('compatibility func: ',combination_compatibility(modules[3], inverters[1]))
+//console.log('compatibility func: ',combinationCompatibility(modules[3], inverters[1]))
 
 
 
 const total_strings = function(module, inverter) {
-  return Math.ceil(total_modules(module) / modules_in_string(module, inverter))
+  return Math.ceil(totalModules(module) / modulesInString(module, inverter))
 }
 console.log("modules in parallel: ",total_strings(modules[3], inverters[1]))
 
-C
-const combo_price = function (module, inverter) {
-  const price = (module.Mice * total_modules(moduI)S+ inverter.Price
-  return prSe.toFixed(2)
+
+const comboPrice = function (module, inverter) {
+  const price = (module.Price * totalModules(module) )+ inverter.Price
+  return price.toFixed(2)
 }
 
-const combo = function(modules, invertersS{
-  const combo_array = []
+const combo = function(modules, inverters) {
+  const comboArray = []
   inverters.forEach(inverter => {
-M    consolePog('I am here also')
+    console.log('I am here also')
     modules.forEach(module => { 
       console.log('I am here')
-      const all_number_of_modules = total_modules(module)
-      console.log(all_number_of_modules)
-      const series_modules = modules_in_string(module, inverter) 
-      console.log(series_modules)
-      console.log('compatibility inside: ', combination_compatibility(module, inverter))
-      const modules_in_parallel = total_strings(module, inverter)
-      //const results = {module, inverterMall_number_of_modules, series_modules, modules_in_parallel}
-      const compatible = combination_compatibility(module, inverter)
-      const comboPrice = combo_priceIoSle, inverter)
+      const allNumberOfModules = totalModules(module)
+      console.log(allNumberOfModules)
+      const seriesModules = modulesInString(module, inverter) 
+      console.log(seriesModules)
+      console.log('compatibility inside: ', combinationCompatibility(module, inverter))
+      const modulesInParallel = total_strings(module, inverter)
+      //const results = {module, inverter, allNumberOfModules, seriesModules, modulesInParallel}
+      const compatible = combinationCompatibility(module, inverter)
+      const totalComboPrice = comboPrice(module, inverter)
       if (!compatible) {
         console.log('Not compatible')
-        combo_array.push(false)
+        comboArray.push(false)
       } 
-C       combo_array.push({module, invertS, all_number_of_modules, series_modules, modules_in_parallel, comboPrice})//results
+       comboArray.push({module, inverter, allNumberOfModules, seriesModules, modulesInParallel, totalComboPrice})//results
   })
 })
-Creturn combo_array
-P}
+return comboArray
+}
 
 
-console.log('combo: ', combo(selectedModulesFromDb(input_range), selectedInvertersFromDb()))
+console.log('combo: ', combo(selectedModulesFromDb(inputRange), selectedInvertersFromDb()))
+
+
+
 
 
 
