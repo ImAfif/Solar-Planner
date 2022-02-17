@@ -13,7 +13,7 @@ export default function Register() {
   Axios.defaults.withCredentials = true;
 
   const register = () => {
-    Axios.post("/register", {
+    Axios.post("/users/register", {
       name: nameReg,
       email: emailReg,
       password: passwordReg,

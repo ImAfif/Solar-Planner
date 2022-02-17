@@ -12,16 +12,14 @@ module.exports = db => {
 
   //logic to get user id from session
 
-  const user_id = //placeholder for logic
 
   //show user a list of their solar grid options
-  router.get("/grid-options", (req, res) => {
+  router.get("/:id/grid-options", (req, res) => {
+    const user_id = req.params.id
     db.query(`SELECT * FROM grid_options WHERE user_id = $1`, [user_id])
     .then(({ rows: grid_options }) => {
       res.json(
         grid_options.reduce (
-          //impliment logic to pass gir option data to front end
-
         )
       )
     })
@@ -63,29 +61,20 @@ module.exports = db => {
       high_range = 400;
     }
 
-    db.query(`SELECT * FROM solar_panels WHERE max_power > $1 AND max_power < $2`, [low_range, high_range])
+    db.query(`SELECT * FROM solar_panels WHERE max_power > $1 AND max_power < $2;`, [low_range, high_range])
     .then(({ rows: solar_panels }) => {
-      res.json(
-        solar_panels.reduce (
-
-        )
-      )
+      res.json(solar_panels)
     })
 
-    db.query(`SELECT * FROM inverters`)
+    db.query(`SELECT * FROM inverters;`)
     .then(({ rows: inverters }) => {
-      res.json(
-        inverters.reduce (
-          //impliment logic to pass gir option data to front end
-        )
-      )
+      res.json(inverters)
     })
 
     //impliment logic from Arvinds helper functions based upon input from user
 
 
     db.query(
-
       `INSERT INTO grid_options
       VALUES
     )
