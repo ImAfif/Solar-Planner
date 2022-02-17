@@ -18,6 +18,6 @@ CREATE TABLE solar_panels (
   max_voltage_V int NOT NULL,
   open_voltage_V int NOT NULL,
   short_circuit_current_A int NOT NULL,
-  panel_area_㎡ int NOT NULL,
+  panel_area int NOT NULL,
   price int NOT NULL
 );
