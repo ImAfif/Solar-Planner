@@ -2,7 +2,7 @@
 require("dotenv").config();
 
 // Web server config
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8081;
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
@@ -36,12 +36,18 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
+const solarPanelRoutes = require("./routes/solar_panels");
+const inverterRoutes = require("./routes/inverters");
+const comboRoutes = require("./routes/grid_options");
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
+app.use("/api/solarpanels", solarPanelRoutes(db));
+app.use("/api/inverters", inverterRoutes(db));
+app.use("/api/combos", comboRoutes(db));
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page

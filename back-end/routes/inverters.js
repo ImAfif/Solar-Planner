@@ -1,12 +1,12 @@
 const router = require("express").Router();
-import selectedInvertersFromDb from './my-app/src/helper_functions.js'
+const { powerNeededByLoad, acPowerOutputFromInverter, dcPowerInputToInverter, operationsLoss, powerPlantCapacity, inverterEstimatedRating, selectedModulesFromDb, selectedInvertersFromDb } = require('./helpers_backend.js');
 
-export default selectedInvertersFromDb = (db, inverterEstimatedRating) => {
+module.exports = (db) => {
 
   const inverterRating = inverterEstimatedRating();
   const inverterHighRange =  inverterRating * 1.25
 
-  router.get("/inverters", (req, res) => {
+  router.get("/api/inverters", (req, res) => {
     db.query(`SELECT * FROM inverters WHERE ac_output_power > $1 && ac_output_power < $2`, [inverterRating, inverterHighRange])
     .then(({ rows: inverters }) => {
     res.json(inverters)
@@ -15,3 +15,18 @@ export default selectedInvertersFromDb = (db, inverterEstimatedRating) => {
 
   return router
 }
+
+
+
+// module.exports = function selectedInvertersFromDb (db) {
+
+
+//   router.get("/inverters", (req, res) => {
+//     db.query(`SELECT * FROM inverters`)
+//     .then(({ rows: inverters }) => {
+//     res.json(inverters)
+//   })
+//   });
+
+//   return router
+// }

@@ -24,11 +24,12 @@ function App() {
 
   useEffect(() => {
     Promise.all([
-      axios.get(`../back-end/db/schema/01_users.sql`),
-      axios.get(`../back-end/db/schema/02_solar_panel.sql`),
-      axios.get(`../back-end/db/schema/03_inverters.sql`),
-      axios.get(`../back-end/db/schema/04_grid_options.sql`)
+      axios.get(`/api/users`),
+      axios.get(`/api/solarpanels`),
+      axios.get(`/api/inverters`),
+      axios.get(`/api/grid-options`)
     ]).then(response => {
+      console.log(response);
       setState(prev => ({ ...prev, 
         users: response[0].data, 
         modules: response[1].data, 

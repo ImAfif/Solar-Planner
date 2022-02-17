@@ -3,7 +3,8 @@ const sunshineHoursPerDay = 3.3;
 const crystalineModule = true;
 //const crystalineModule = false;
 const siteArea = 15;
-
+//Bring inverter data from database in the inverters variable
+//Bring the modules data from database in the module variable
 
 const powerNeededByLoad = function (units, hours) {
 

@@ -15,7 +15,7 @@ module.exports = db => {
   const user_id = //placeholder for logic
 
   //show user a list of their solar grid options
-  router.get("/grid-options", (req, res) => {
+  router.get("/api/grid-options", (req, res) => {
     db.query(`SELECT * FROM grid_options WHERE user_id = $1`, [user_id])
     .then(({ rows: grid_options }) => {
       res.json(
@@ -27,7 +27,7 @@ module.exports = db => {
     })
   });
 
-  router.put("/grid-options", (req, res) => {
+  router.put("/api/grid-options", (req, res) => {
     if (process.env.TEST_ERROR) {
       setTimeout(() => response.status(500).json({}), 1000);
       return;
@@ -40,10 +40,12 @@ module.exports = db => {
     const price = req.body.price;
     const low_range = 0;
     const high_range = 0;
-    const panel_type = ;
+    const panel_type = req.body.moduleType
     const type = () => {
-      if()
-      panel_type += 1
+      if('abc' === 1) {
+        panel_type += 1
+
+      }
     }
 
     if (req.body.watts == 1) {
@@ -87,7 +89,7 @@ module.exports = db => {
     db.query(
 
       `INSERT INTO grid_options
-      VALUES
+      VALUES`
     )
   })
 
