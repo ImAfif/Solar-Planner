@@ -4,7 +4,7 @@ nav {
   right: 0;
   z-index: 9999;
   height: 75px;
-  background: #ffffff;
+  background: #8fe088;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -72,13 +72,13 @@ nav {
   vertical-align: top;
 }
 
-.green-background {
+.input-form {
   left: 2em;
   padding-left: 10px;
   padding-right: 20em;
   position: relative;
-  background-color: #1a2e18;
-  color: yellow;
+  background-color: #8fe088;
+  color: rgba(22, 91, 170, 0.918);
 }
 
 .App-header {
@@ -95,21 +95,21 @@ nav {
   display: flex;
   left: 3em;
   position: relative;
-  top: 32em;
+  
 }
 
 .area {
   display: flex;
   position: relative;
   left: 4em;
-  top: 46em;
+  top: 4em;
 }
 
 .Area-available {
   display: flex;
   left: 3em;
   position: relative;
-  top: 37em;
+  top: 3em;
 }
 
 .price {
@@ -139,4 +139,9 @@ nav {
   height: 100%;
   width: 100%;
   position: absolute;
+}
+
+.calculate {
+  background-color: #8fe088;
+  left: 3em;
 }

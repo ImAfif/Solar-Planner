@@ -10,9 +10,9 @@ function Navigation() {
         <a href="/About" class="About">
           About
         </a>
-        <a href="/Store" class="Store">
+        {/* <a href="/Store" class="Store">
           Store
-        </a>
+        </a> */}
         <a href="/Login" class="Login">
           Login
         </a>
