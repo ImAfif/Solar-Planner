@@ -4,30 +4,45 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 function Input(props) {
   
-  const [energyPerDay, setEnergyPerDay ] = useState(props.energyPerDay)
-  const [inputRange, setInputRange] = setInputRange(props.inputRange)
-  const [moduleType, setModuleType] = useState(props.moduleType)
+  // const [energyPerDay, setEnergyPerDay ] = useState(props.energyPerDay)
+  // const [inputRange, setInputRange] = setInputRange(props.inputRange)
+  // const [moduleType, setModuleType] = useState(props.moduleType)
 
-
-  const [userInput, setUserInput] = useState({ 
-    energyPerDay: props.energyPerDay, 
-    inputRange: props.inputRange,
-    moduleType: props.moduleType 
-  })
+  //Hardcoded data I have taken
+ 
+  // const [userInput, setUserInput] = useState({ 
+  //   energyPerDay: props.energyPerDay, 
+  //   inputRange: props.inputRange,
+  //   moduleType: props.moduleType 
+  // })
 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     console.log('name: ----', name, 'value: ----- ', value)
-    setUserInput({ ...userInput, [name]: value})
-    console.log("userInput: ----",userInput);
+    //setUserInput({ ...userInput, [name]: value})
+    //console.log("userInput: ----",userInput);
+
   }
 
   const handleSubmit = (e) => {
+    // const data = {
+    //   energyPerDay: 20,
+    //   inputRange: 1,
+    //   moduleType: 1 
+    // }
     e.preventDefault()
-    axios.post("/api/gird_options", { energyPerDay, inputRange, moduleType })
-    let navigate = useNavigate()
-    navigate('/user/combo/:id')
+    alert("hello");
+    axios.post('/api/gridoptions/griddata', {
+      energyPerDay: 20,
+      inputRange: 1,
+      moduleType: 1 
+    });
+
+     //axios.post("/api/girdoptions/griddata", { energyPerDay: data[energyPerDay], inputRange: data.inputRange, moduleType: data.moduleType })
+    // let navigate = useNavigate()
+    // navigate('/user/combo/:id')
+
   }
   
   return (
@@ -72,7 +87,7 @@ function Input(props) {
             name="energyPerDay"
             type="text" 
             placeholder="Units per Day in kWh"
-            value={userInput.energyPerDay}
+            // value={userInput.energyPerDay}
             onChange={handleChange} 
             />
             </label>
@@ -83,7 +98,9 @@ function Input(props) {
             </label>
             <input className="area" name="area" type="text"></input>
           </p> */}
-          <button className="calculate" href="/user/combo/:id">Calculate</button>
+          <button className="calculate" 
+            onClick={(e)=>handleSubmit(e)}
+          >Calculate</button>
 
           {/* <p>
             <label className="price-question">Price</label>

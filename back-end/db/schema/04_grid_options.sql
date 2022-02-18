@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS grid_options CASCADE;
 
 CREATE TABLE grid_options (
   id SERIAL PRIMARY KEY NOT NULL,
+  user_id int REFERENCES users(id) on DELETE CASCADE,
   inverter_id int REFERENCES inverters(id) on DELETE CASCADE,
   solar_panel_id int REFERENCES solar_panels(id) on DELETE CASCADE,
   power_req_kW int NOT NULL,
