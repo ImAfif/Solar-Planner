@@ -6,6 +6,7 @@
  */
 
 const router = require("express").Router();
+const { powerNeededByLoad, acPowerOutputFromInverter, dcPowerInputToInverter, operationsLoss, powerPlantCapacity, inverterEstimatedRating, selectedModulesFromDb, selectedInvertersFromDb, totalModules, modulesInString, combinationCompatibility, totalStrings, comboPrice, combo } = require("./helper_functions");
 
 module.exports = db => {
 
@@ -29,6 +30,10 @@ module.exports = db => {
   router.post("/griddata", (req, res) => {
     console.log("We are reaching this function");
     console.log(req.body);
+    const { energyPerDay, inputRange, moduleType } = req.body;
+    const sunshineHoursPerDay = 3.3;
+
+    console.log('First func:   ---', powerNeededByLoad(Number(energyPerDay), 3.3));
     // if (process.env.TEST_ERROR) {
     //   setTimeout(() => response.status(500).json({}), 1000);
     //   return;

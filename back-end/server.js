@@ -1,6 +1,7 @@
 // load .env data into process.env
 require("dotenv").config();
 
+
 // Web server config
 const PORT = process.env.PORT || 3001;
 const sassMiddleware = require("./lib/sass-middleware");
@@ -23,7 +24,7 @@ db.connect();
 app.use(morgan("dev"));
 
 app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.use(
   "/styles",
@@ -35,7 +36,9 @@ app.use(
 );
 
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
+const jsonParser = bodyParser.json();
+app.use(jsonParser); // use it globally
+//app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(
   session({

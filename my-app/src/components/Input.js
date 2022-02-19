@@ -10,34 +10,38 @@ function Input(props) {
 
   //Hardcoded data I have taken
  
-  // const [userInput, setUserInput] = useState({ 
-  //   energyPerDay: props.energyPerDay, 
-  //   inputRange: props.inputRange,
-  //   moduleType: props.moduleType 
-  // })
+  const [userInput, setUserInput] = useState({ 
+    energyPerDay: '', 
+    inputRange: '',
+    moduleType: '' 
+  })
 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     console.log('name: ----', name, 'value: ----- ', value)
-    //setUserInput({ ...userInput, [name]: value})
-    //console.log("userInput: ----",userInput);
+    setUserInput({ ...userInput, [name]: value})
+    console.log("userInput: ----",userInput);
 
   }
 
   const handleSubmit = (e) => {
-    // const data = {
-    //   energyPerDay: 20,
-    //   inputRange: 1,
-    //   moduleType: 1 
-    // }
-    e.preventDefault()
-    alert("hello");
-    axios.post('/api/gridoptions/griddata', {
-      energyPerDay: 20,
+    const data = {
+      energyPerDay: props.energyPerDay,
       inputRange: 1,
       moduleType: 1 
-    });
+    };
+    const abc = JSON.stringify(data)
+    e.preventDefault()
+    console.log('aaaaaaaaa', userInput)
+    // alert("hello");
+    // axios.post('/api/gridoptions/griddata', {data},
+    //           {headers:{'Content-Type': 'application/json'}}
+    //           )
+    axios.post('/api/gridoptions/griddata', userInput)
+    // .then((response) => {
+    //   console.log(response)
+    // })//, 
 
      //axios.post("/api/girdoptions/griddata", { energyPerDay: data[energyPerDay], inputRange: data.inputRange, moduleType: data.moduleType })
     // let navigate = useNavigate()
@@ -51,8 +55,7 @@ function Input(props) {
         <h2>Input Form</h2>
         {/* <form autoComplete='off' onSubmit= {e => e.preventDefault()}> */}
         <form autoComplete='off' onSubmit= {handleSubmit}>
-          <span className="Watts">Choose the panel wattage
-          </span>   
+          <span className="Watts">Choose the panel wattage  
           {/* <select className="input-range" name="inputRange" onSelect={e => setInputRange(e.target.value)}> */}
           <select className="input-range" name="inputRange" onChange={handleChange}>
             <option value="" disabled selected>
@@ -64,6 +67,7 @@ function Input(props) {
             <option value="4">300 - 350</option>
             <option value="5">350 - 400</option>
           </select>
+          </span> 
           {/* <select className="module-type" name="moduleType" onSelect={e => setModuleType(e.target.value)}> */}
           <select className="module-type" name="moduleType" onChange={handleChange}>
             <option value="" disabled selected>
@@ -101,6 +105,7 @@ function Input(props) {
           <button className="calculate" 
             onClick={(e)=>handleSubmit(e)}
           >Calculate</button>
+          <br/>
 
           {/* <p>
             <label className="price-question">Price</label>
