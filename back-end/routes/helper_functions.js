@@ -154,6 +154,7 @@ const selectedInvertersFromDb = function () {
 // }
 
 const totalModules = function(module, callback) {
+  console.log('inside funct module.pm:  ----', module.Pm)
   return Math.ceil((callback  * 1000) / module.Pm)
 }
 //console.log('total modules: ', totalModules(modules[3]))

@@ -73,8 +73,12 @@ module.exports = db => {
     console.log(inputRange)
     console.log('f7: ',f7);
 
-    const f8 = totalModules(f7);
+    const panel = f7[0]
+    console.log('panel: --', panel)
+    const f8 = totalModules(panel, f6);
     console.log('f8: ',f8);
+
+
     // if (process.env.TEST_ERROR) {
     //   setTimeout(() => response.status(500).json({}), 1000);
     //   return;
