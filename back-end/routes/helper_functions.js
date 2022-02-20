@@ -1,7 +1,7 @@
 const unitsNeededPerDay = 20;
 const inputRange = 1;
 const sunshineHoursPerDay = 3.3;
-const crystalineModule = true;
+//const crystalineModule = true;
 //const crystalineModule = false;
 const siteArea = 15;
 
@@ -40,12 +40,21 @@ const dcPowerInputToInverter = function(callback) {
 //console.log('powert to inverter: ',dcPowerInputToInverter())
 
 
-const operationsLoss = function (crystalineModule) {
+// const operationsLoss = function (crystalineModule) {
 
-  if (!crystalineModule) {
+//   if (!crystalineModule) {
+//     return 15.5;
+//   }
+//   return 19.25;
+// }
+
+const operationsLoss = function (crystalineModule) {
+  console.log('inside the funct moduleType: ', crystalineModule);
+  if (crystalineModule !== '1') {
     return 15.5;
+  } else {
+    return 19.25;
   }
-  return 19.25;
 }
 //console.log('op loss: ',operationsLoss(crystalineModule))
 
