@@ -12,10 +12,16 @@ const powerNeededByLoad = function (units, hours) {
 
 //console.log(powerNeededByLoad(unitsNeededPerDay, sunshineHoursPerDay))
 
-const acPowerOutputFromInverter = function() {
+// const acPowerOutputFromInverter = function() {
+//   const assumption = 5; // adding assumptions seprately to display them while displaying the function values, maybe below the displayed value
+//   const loss = assumption / 100;
+//   return (powerNeededByLoad(unitsNeededPerDay, sunshineHoursPerDay) / (1 - loss))
+// }
+
+const acPowerOutputFromInverter = function(callback) {
   const assumption = 5; // adding assumptions seprately to display them while displaying the function values, maybe below the displayed value
   const loss = assumption / 100;
-  return (powerNeededByLoad(unitsNeededPerDay, sunshineHoursPerDay) / (1 - loss))
+  return (callback / (1 - loss))
 }
 
 //console.log(acPowerOutputFromInverter())

@@ -8,7 +8,7 @@
 const router = require("express").Router();
 const {
   powerNeededByLoad,
-  // acPowerOutputFromInverter,
+  acPowerOutputFromInverter,
   // dcPowerInputToInverter,
   // operationsLoss,
   // powerPlantCapacity,
@@ -51,6 +51,9 @@ module.exports = db => {
     //const epd = Number(energyPerDay);
     const f1 = powerNeededByLoad(energyPerDay, sunshineHoursPerDay)
     console.log('First func:   ---', f1);
+
+    const f2 = acPowerOutputFromInverter(f1);
+    console.log(f2);
     // if (process.env.TEST_ERROR) {
     //   setTimeout(() => response.status(500).json({}), 1000);
     //   return;
