@@ -67,7 +67,7 @@ const powerPlantCapacity = function (callback1, callback2) {
   const loss = callback1 / 100;
   return callback2 / (1 - loss);
 }
-console.log("Plant capacity: ",powerPlantCapacity())
+//console.log("Plant capacity: ",powerPlantCapacity())
 
 /////////// module & inverter selections
 
@@ -92,10 +92,16 @@ console.log("Plant capacity: ",powerPlantCapacity())
 //   6: {'model name': 'Pass6', Pm: 145, Voc: 22.4, Isc: 8.5, Vm: 18.35, Im: 7.9, Price: 80 },
 // }
 
-const inverterEstimatedRating = function() {
+// const inverterEstimatedRating = function() {
+//   const assumption = 10
+//   const safetyFactor = assumption / 100
+//   return (dcPowerInputToInverter() / (1 - safetyFactor));
+// }
+
+const inverterEstimatedRating = function(callback) {
   const assumption = 10
   const safetyFactor = assumption / 100
-  return (dcPowerInputToInverter() / (1 - safetyFactor));
+  return (callback / (1 - safetyFactor));
 }
 //console.log("inverter capacity: ",inverterEstimatedRating());
 

@@ -12,7 +12,7 @@ const {
   dcPowerInputToInverter,
   operationsLoss,
   powerPlantCapacity,
-  // inverterEstimatedRating,
+  inverterEstimatedRating,
   // selectedModulesFromDb,
   // selectedInvertersFromDb,
   // totalModules,
@@ -64,6 +64,9 @@ module.exports = db => {
 
     const f5 = powerPlantCapacity(f4, f3);
     console.log('f5: ',f5);
+
+    const f6 = inverterEstimatedRating(f5);
+    console.log('f6: ',f6);
     // if (process.env.TEST_ERROR) {
     //   setTimeout(() => response.status(500).json({}), 1000);
     //   return;
