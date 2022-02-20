@@ -10,7 +10,7 @@ export default function Login() {
   Axios.defaults.withCredentials = true;
 
   const login = () => {
-    Axios.post("users//login", {
+    Axios.post("/users/login", {
       email: email,
       password: password,
     }).then((response) => {

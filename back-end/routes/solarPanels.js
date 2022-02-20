@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-export default selectedModulesFromDb = db => {
+module.exports = (db) => {
 
   router.get("/api/solarpanels", (req, res) => {
 

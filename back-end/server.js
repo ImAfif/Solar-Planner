@@ -1,8 +1,9 @@
 // load .env data into process.env
 require("dotenv").config();
 
+
 // Web server config
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3004;
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
@@ -23,7 +24,7 @@ db.connect();
 app.use(morgan("dev"));
 
 app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.use(
   "/styles",
@@ -34,8 +35,10 @@ app.use(
   })
 );
 
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser()); //fixed the object passing to backend
+const jsonParser = bodyParser.json();
+app.use(jsonParser); // use it globally
+//app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(
   session({
@@ -53,17 +56,29 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
+// const usersRoutes = require("./routes/users");
+// const solarPanelRoutes = require("./routes/solar_panels");
+// const inverterRoutes = require("./routes/inverters");
+// const comboRoutes = require("./routes/grid_options");
+
+
+// // Mount all resource routes
+// // Note: Feel free to replace the example routes below with your own
+// app.use("/api/users", usersRoutes(db));
+// app.use("/api/solarpanels", solarPanelRoutes(db));
+// app.use("/api/inverters", inverterRoutes(db));
+// app.use("/api/combos", comboRoutes(db));
 const usersRoutes = require("./routes/users");
-const solarPanelRoutes = require("./routes/solarpanels");
+const solarPanelRoutes = require("./routes/solarPanels");
 const inverterRoutes = require("./routes/inverters");
-const gridOptionRoutes = require("./routes/grid-options");
+const gridOptionRoutes = require("./routes/gridOptions");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/", usersRoutes(db));
+app.use("/api/users", usersRoutes(db));
 app.use("/api/solarpanels", solarPanelRoutes(db));
 app.use("/api/inverters", inverterRoutes(db));
-app.use("/api/grid-options", gridOptionRoutes(db));
+app.use("/api/gridoptions", gridOptionRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -71,7 +86,10 @@ app.use("/api/grid-options", gridOptionRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  console.log("HELLO we are in the main server path");
+
+
+  //res.render("index");
 });
 
 app.listen(PORT, () => {

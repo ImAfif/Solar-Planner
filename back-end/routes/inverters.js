@@ -1,11 +1,11 @@
 const router = require("express").Router();
-import selectedInvertersFromDb from './my-app/src/helper_functions.js'
+const { powerNeededByLoad, acPowerOutputFromInverter, dcPowerInputToInverter, operationsLoss, powerPlantCapacity, inverterEstimatedRating, selectedModulesFromDb, selectedInvertersFromDb } = require('./helpers_backend.js');
 
-export default selectedInvertersFromDb = (db, inverterEstimatedRating) => {
+module.exports = (db) => {
 
 
 
-  const inverterRating = inverterEstimatedRating(input);
+  const inverterRating = inverterEstimatedRating();
   const inverterHighRange =  inverterRating * 1.25
 
   router.get("/api/inverters", (req, res) => {
