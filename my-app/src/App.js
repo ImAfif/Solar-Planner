@@ -27,14 +27,16 @@ function App() {
       axios.get(`/api/users`),
       axios.get(`/api/solarpanels`),
       axios.get(`/api/inverters`),
-      axios.get(`/api/grid-options`)
+      axios.get(`/api/grid-options`),
+      axios.get(`/api/grid-options/griddata`)
     ]).then(response => {
-      console.log(response);
+      console.log('response from database in react aap.js: -----',response);
       setState(prev => ({ ...prev, 
         users: response[0].data, 
         modules: response[1].data, 
         inverters: response[2].data, 
-        combos: response[3].data
+        combos: response[3].data,
+        grid: response[4].data
       }))
     });
   }, []);

@@ -71,26 +71,26 @@ const powerPlantCapacity = function (callback1, callback2) {
 
 /////////// module & inverter selections
 
-//const avg = function (a, b) {
-//   return (a + b) / 2;
-// }
+const avg = function (a, b) {
+  return (a + b) / 2;
+}
 
 //Inverter Fake data
-// const inverters = {
-//   1: {'model name': 'model1', Vmax: 600, Vmpp: avg(400, 800), Imax: 35, Efficiency: 98.2, Pac: 5.6, Price: 1500},//Pac in kva
-//   2: {'model name': 'model2', Vmax: 400, Vmpp: avg(80, 100), Imax: 10, Efficiency: 98, Pac: 40, Price: 1600},
-//   3: {'model name': 'model3', Vmax: 600, Vmpp: avg(100, 160), Imax: 75, Efficiency: 97.5, Pac: 10, Price: 1100},
-//   4: {'model name': 'Pass4', Vmax: 600, Vmpp: avg(80, 120), Imax: 50, Efficiency: 97, Pac: 7.5, Price: 1200}
-// }
+const inverters = {
+  1: {'model name': 'model1', Vmax: 600, Vmpp: avg(400, 800), Imax: 35, Efficiency: 98.2, Pac: 5.6, Price: 1500},//Pac in kva
+  2: {'model name': 'model2', Vmax: 400, Vmpp: avg(80, 100), Imax: 10, Efficiency: 98, Pac: 40, Price: 1600},
+  3: {'model name': 'model3', Vmax: 600, Vmpp: avg(100, 160), Imax: 75, Efficiency: 97.5, Pac: 10, Price: 1100},
+  4: {'model name': 'Pass4', Vmax: 600, Vmpp: avg(80, 120), Imax: 50, Efficiency: 97, Pac: 7.5, Price: 1200}
+}
 //modules fake data
-// const modules = {
-//   1: {'model name': 'model1', Pm: 210, Voc: 41.59, Isc: 7.13, Vm: 33.81, Im: 6.21, Price: 100 },
-//   2: {'model name': 'model2', Pm: 350, Voc: 39, Isc: 8, Vm: 32, Im: 10, Price: 150 },
-//   3: {'model name': 'model3', Pm: 151, Voc: 22.4, Isc: 8.5, Vm: 18.35, Im: 7.9, Price: 85 },
-//   4: {'model name': 'model4', Pm: 240, Voc: 37.38, Isc: 8.45, Vm: 30.60, Im: 7.85, Price: 110 },
-//   5: {'model name': 'model5', Pm: 150, Voc: 21.4, Isc: 7.5, Vm: 19.35, Im: 6.9, Price: 90 },
-//   6: {'model name': 'Pass6', Pm: 145, Voc: 22.4, Isc: 8.5, Vm: 18.35, Im: 7.9, Price: 80 },
-// }
+const modules = {
+  1: {'model name': 'model1', Pm: 210, Voc: 41.59, Isc: 7.13, Vm: 33.81, Im: 6.21, Price: 100 },
+  2: {'model name': 'model2', Pm: 350, Voc: 39, Isc: 8, Vm: 32, Im: 10, Price: 150 },
+  3: {'model name': 'model3', Pm: 151, Voc: 22.4, Isc: 8.5, Vm: 18.35, Im: 7.9, Price: 85 },
+  4: {'model name': 'model4', Pm: 240, Voc: 37.38, Isc: 8.45, Vm: 30.60, Im: 7.85, Price: 110 },
+  5: {'model name': 'model5', Pm: 150, Voc: 21.4, Isc: 7.5, Vm: 19.35, Im: 6.9, Price: 90 },
+  6: {'model name': 'Pass6', Pm: 145, Voc: 22.4, Isc: 8.5, Vm: 18.35, Im: 7.9, Price: 80 },
+}
 
 // const inverterEstimatedRating = function() {
 //   const assumption = 10
@@ -107,23 +107,27 @@ const inverterEstimatedRating = function(callback) {
 
 
 const selectedModulesFromDb = function (inputRange) {
-  if (inputRange === 1) {
+  if (inputRange === '1') {
+    console.log('i am sending inputrange from inside the function: --', inputRange)
     return Object.values(modules).filter(module =>
-      module.Pm < 200 && module.Pm > 140)
+      module.Pm <= 200 && module.Pm >= 140)
   }
-  if (inputRange === 2) {
-    return Object.values(modules).filter(module => module.Pm < 250 && module.Pm > 200)
+  if (inputRange === '2') {
+    console.log('i am sending inputrange from inside the function: --', inputRange)
+    return Object.values(modules).filter(module => module.Pm <= 250 && module.Pm > 200)
   }
-  if (inputRange === 3) {
+  if (inputRange === '3') {
+    console.log('i am sending inputrange from inside the function: --', inputRange)
+    return Object.values(modules).filter(module => module.Pm <= 300 && module.Pm > 250)
+  }
+  if (inputRange === '4') {
+    console.log('i am sending inputrange from inside the function: --', inputRange)
+    return Object.values(modules).filter(module => module.Pm <= 350 && module.Pm > 300)
 
-    return Object.values(modules).filter(module => module.Pm < 300 && module.Pm > 250)
   }
-  if (inputRange === 4) {
-    return Object.values(modules).filter(module => module.Pm < 350 && module.Pm > 300)
-
-  }
-  if (inputRange === 5) {
-    return Object.values(modules).filter(module => module.Pm < 400 && module.Pm > 350)
+  if (inputRange === '5') {
+    console.log('i am sending inputrange from inside the function: --', inputRange)
+    return Object.values(modules).filter(module => module.Pm <= 400 && module.Pm > 350)
 
   }
 }
@@ -145,8 +149,12 @@ const selectedInvertersFromDb = function () {
 
 
 
-const totalModules = function(selectedModule) {
-  return Math.ceil((powerPlantCapacity() * 1000) / selectedModule.Pm)
+// const totalModules = function(selectedModule) {
+//   return Math.ceil((powerPlantCapacity() * 1000) / selectedModule.Pm)
+// }
+
+const totalModules = function(module, callback) {
+  return Math.ceil((callback  * 1000) / module.Pm)
 }
 //console.log('total modules: ', totalModules(modules[3]))
 
