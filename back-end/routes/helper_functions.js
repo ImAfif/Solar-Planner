@@ -136,18 +136,6 @@ const selectedModulesFromDb = function (inputRange) {
 
 
 
-const selectedInvertersFromDb = function () {
-  return Object.values(inverters).filter(inverter => {
-  //console.log('invert Pac: ',inverter.Pac)
-  return (
-    inverter.Pac > inverterEstimatedRating() &&
-    inverter.Pac < (inverterEstimatedRating() * 1.25)
-  )
-  })
-}
-//console.log(selectedInvertersFromDb())
-
-
 
 // const totalModules = function(selectedModule) {
 //   return Math.ceil((powerPlantCapacity() * 1000) / selectedModule.Pm)
@@ -158,6 +146,29 @@ const totalModules = function(module, callback) {
   return Math.ceil((callback  * 1000) / module.Pm)
 }
 //console.log('total modules: ', totalModules(modules[3]))
+
+
+// const selectedInvertersFromDb = function () {
+//   return Object.values(inverters).filter(inverter => {
+//   //console.log('invert Pac: ',inverter.Pac)
+//   return (
+//     inverter.Pac > inverterEstimatedRating() &&
+//     inverter.Pac < (inverterEstimatedRating() * 1.25)
+//   )
+//   })
+// }
+
+const selectedInvertersFromDb = function (callback) {
+  return Object.values(inverters).filter(inverter => {
+  //console.log('invert Pac: ',inverter.Pac)
+  return (
+    inverter.Pac > callback &&
+    inverter.Pac < (callback * 1.25)
+  )
+  })
+}
+//console.log(selectedInvertersFromDb())
+
 
 
 

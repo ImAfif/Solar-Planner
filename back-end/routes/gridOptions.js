@@ -14,8 +14,8 @@ const {
   powerPlantCapacity,
   inverterEstimatedRating,
   selectedModulesFromDb,
-  //selectedInvertersFromDb,
   totalModules,
+  selectedInvertersFromDb,
   // modulesInString,
   // combinationCompatibility,
   // totalStrings,
@@ -78,6 +78,9 @@ module.exports = db => {
     const f8 = totalModules(panel, f6);
     console.log('f8: ',f8);
 
+
+    const f9 = selectedInvertersFromDb(f6);
+    console.log('f9: ',f9);
 
     // if (process.env.TEST_ERROR) {
     //   setTimeout(() => response.status(500).json({}), 1000);
