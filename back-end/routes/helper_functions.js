@@ -49,7 +49,7 @@ const dcPowerInputToInverter = function(callback) {
 // }
 
 const operationsLoss = function (crystalineModule) {
-  console.log('inside the funct moduleType: ', crystalineModule);
+  //console.log('inside the funct moduleType: ', crystalineModule);
   if (crystalineModule !== '1') {
     return 15.5;
   } else {
@@ -58,9 +58,14 @@ const operationsLoss = function (crystalineModule) {
 }
 //console.log('op loss: ',operationsLoss(crystalineModule))
 
-const powerPlantCapacity = function () {
-  const loss = operationsLoss() / 100;
-  return dcPowerInputToInverter() / (1 - loss);//.toFixed(1);//????????????
+// const powerPlantCapacity = function () {
+//   const loss = operationsLoss() / 100;
+//   return dcPowerInputToInverter() / (1 - loss);
+// }
+
+const powerPlantCapacity = function (callback1, callback2) {
+  const loss = callback1 / 100;
+  return callback2 / (1 - loss);
 }
 console.log("Plant capacity: ",powerPlantCapacity())
 
