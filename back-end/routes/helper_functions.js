@@ -26,10 +26,16 @@ const acPowerOutputFromInverter = function(callback) {
 
 //console.log(acPowerOutputFromInverter())
 
-const dcPowerInputToInverter = function() {
+// const dcPowerInputToInverter = function() {
+//   const assumption = 5;
+//   const loss = assumption / 100;
+//   return acPowerOutputFromInverter() / (1 - loss)
+// }
+
+const dcPowerInputToInverter = function(callback) {
   const assumption = 5;
   const loss = assumption / 100;
-  return acPowerOutputFromInverter() / (1 - loss)
+  return callback / (1 - loss)
 }
 //console.log('powert to inverter: ',dcPowerInputToInverter())
 
