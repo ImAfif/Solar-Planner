@@ -17,7 +17,7 @@ const {
   totalModules,
   selectedInvertersFromDb,
   modulesInString,
-  // combinationCompatibility,
+  combinationCompatibility,
   // totalStrings,
   // comboPrice,
   // combo
@@ -73,7 +73,7 @@ module.exports = db => {
     console.log(inputRange)
     console.log('f7: ',f7);
 
-    const panel = f7[0]
+    const panel = f7[2]
     console.log('panel: --', panel)
     const f8 = totalModules(panel, f6); // when calling in combo pass module as argument instead of panel
     console.log('f8: ',f8);
@@ -87,6 +87,9 @@ module.exports = db => {
     const f10 = modulesInString(panel, inverter);
     console.log('f10: ',f10);
 
+
+    const f11 = combinationCompatibility(panel, inverter);
+    console.log('f11: ',f11);
     // if (process.env.TEST_ERROR) {
     //   setTimeout(() => response.status(500).json({}), 1000);
     //   return;
