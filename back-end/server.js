@@ -35,7 +35,7 @@ app.use(
   })
 );
 
-app.use(cookieParser());
+app.use(cookieParser()); //fixed the object passing to backend
 const jsonParser = bodyParser.json();
 app.use(jsonParser); // use it globally
 //app.use(bodyParser.urlencoded({ extended: false }));
