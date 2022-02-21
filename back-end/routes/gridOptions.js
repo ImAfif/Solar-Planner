@@ -23,7 +23,7 @@ const {
   // combo
 } = require("./helper_functions");
 
-const { getInverterArray, getPanelByInputRange } = require('./helpers/selectors')
+const { getInverterArray, getPanelByInputRange, getComboByUserId } = require('./helpers/selectors')
 
 
 module.exports = db => {
@@ -47,7 +47,7 @@ module.exports = db => {
 
   router.get("/griddata", ( req, res ) => {
     res.json([
-      {id: 1, user_id: 1, inverter_id: 3, solar_panel_id: 4, power_req_kw: 20, estimated_loss_kw: 5, power_capacity_kw: 8}
+      {getComboByUserId(user_id = 1), id: 1, user_id: 1, inverter_id: 3, solar_panel_id: 4, power_req_kw: 20, estimated_loss_kw: 5, power_capacity_kw: 8}
     ])
   })
 

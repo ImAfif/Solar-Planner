@@ -23,3 +23,14 @@ const getInverterArray = (inverterEstimatedRating) => {
 }
 
 exports.getInverterArray = getInverterArray
+
+const getComboByUserId = (userId) => {
+  const queryString = `SELECT * FROM grid_options WHERE user_id === $1`;
+
+  return db
+  .query(queryString, [userId])
+  .then(res => res.rows)
+  .catch(e => console.log(e.message))
+}
+
+exports.getComboByUserId = getComboByUserId
