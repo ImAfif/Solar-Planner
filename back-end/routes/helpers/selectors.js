@@ -23,7 +23,7 @@ const getPanelByInputRange = (inputRange) => {
   if (inputRange === '5') {
     high_range = 400;
     low_range = 350;
-
+  }
   return db
   .query(queryString, [low_range, high_range])
   .then(res => res.rows)
@@ -58,7 +58,7 @@ const getComboByUserId = (userId) => {
 exports.getComboByUserId = getComboByUserId
 
 
-const addCombo = function(??) {
+const addCombo = () => { //  <--- enter parameter
   //let queryParams = [];
   let queryString = `INSERT INTO grid_options (user_id, inverter_id, solar_panel_id, power_needed_by_load, ac_power_output_from_inverter, dc_power_input_to_inverter, operations_loss, power_plant_capacity, inverter_estimated_rating) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, ) `;
 
@@ -68,9 +68,7 @@ const addCombo = function(??) {
 
   console.log(queryString, queryParams);
 
-  queryString += ` RETURNING *;`;
-
-  return pool
+  return db
   .query(queryString, queryParams)
   .then(res => res.rows)
   .catch(e => console.error(e.message))

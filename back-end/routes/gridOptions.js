@@ -73,21 +73,10 @@ module.exports = db => {
     const f6 = inverterEstimatedRating(f5);
     console.log('f6: ',f6);
 
-    // const moduleDatafromDB = Promise.all([
-    //   db.query(`SELECT * FROM solar_panel_tech WHERE max_power_Wp < 200`),
-    //   db.query(`SELECT * FROM inverters WHERE max_power_Wp < 200`)])
-    //   .then(results => {
-    //   const solar_panels = results[0].rows
-    //   const inverters = results[1].rows
-    //   f7,
-    //   f14
-    // })
 
-
-
-    // const f7 = selectedModulesFromDb(inputRange);
-    // console.log(inputRange)
-    // console.log('f7: ',f7);
+    const f7 = getPanelByInputRange(inputRange);
+    console.log(inputRange)
+    console.log('f7: ',f7);
 
     //db.query(`INSERT  `)
 
