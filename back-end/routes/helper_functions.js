@@ -48,9 +48,9 @@ const dcPowerInputToInverter = function(callback) {
 //   return 19.25;
 // }
 
-const operationsLoss = function (crystalineModule) {
+const operationsLoss = function (module) {
   //console.log('inside the funct moduleType: ', crystalineModule);
-  if (crystalineModule !== '1') {
+  if (module !== '1') {
     return 15.5;
   } else {
     return 19.25;

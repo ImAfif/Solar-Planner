@@ -1,12 +1,13 @@
 -- Drop and recreate solar panels table
 
-DROP TABLE IF EXISTS solar_panels CASCADE;
 DROP TABLE IF EXISTS solar_panel_tech CASCADE;
 
 CREATE TABLE solar_panel_tech (
   id SERIAL PRIMARY KEY NOT NULL,
   technology varchar(255)
 );
+
+DROP TABLE IF EXISTS solar_panels CASCADE;
 
 CREATE TABLE solar_panels (
   id SERIAL PRIMARY KEY NOT NULL,

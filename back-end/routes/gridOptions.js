@@ -40,8 +40,10 @@ module.exports = db => {
     })
   });
 
+
   router.get("/griddata", ( req, res ) => {
-    const comboById = getComboByUserId(user_id)
+    const userId = req.cookies.userId
+    const comboById = getComboByUserId(userId, db)
     res.json([
       {comboById, id: 1, user_id: 1, inverter_id: 3, solar_panel_id: 4, power_req_kw: 20, estimated_loss_kw: 5, power_capacity_kw: 8}
     ])
@@ -54,6 +56,7 @@ module.exports = db => {
     console.log('engy type: -----', energyPerDay);
     const sunshineHoursPerDay = 3.3;
     //const epd = Number(energyPerDay);
+
     const f1 = powerNeededByLoad(energyPerDay, sunshineHoursPerDay)
     console.log('First func:   ---', f1);
 
@@ -73,26 +76,19 @@ module.exports = db => {
     const f6 = inverterEstimatedRating(f5);
     console.log('f6: ',f6);
 
-    // const moduleDatafromDB = Promise.all([
-    //   db.query(`SELECT * FROM solar_panel_tech WHERE max_power_Wp < 200`),
-    //   db.query(`SELECT * FROM inverters WHERE max_power_Wp < 200`)])
-    //   .then(results => {
-    //   const solar_panels = results[0].rows
-    //   const inverters = results[1].rows
-    //   f7,
-    //   f14
-    // })
 
+    const f7 = getPanelByInputRange(inputRange, db).then(panels => console.log(panels))
 
+    console.log(inputRange)
+    console.log('f7: ',f7);
 
-    // const f7 = selectedModulesFromDb(inputRange);
-    // console.log(inputRange)
-    // console.log('f7: ',f7);
+    // addCombo();
 
     //db.query(`INSERT  `)
 
     //const panel = f7[2]
     //console.log('panel: --', panel)
+
     //const f8 = totalModules(panel, f6); // when calling in combo pass module as argument instead of panel
    // console.log('f8: ',f8);
 

@@ -26,22 +26,22 @@ function Input(props) {
   }
 
   const handleSubmit = (e) => {
-    const data = {
-      energyPerDay: props.energyPerDay,
-      inputRange: 1,
-      moduleType: 1 
-    };
-    const abc = JSON.stringify(data)
     e.preventDefault()
+    // const data = {
+    //   energyPerDay: props.energyPerDay,
+    //   inputRange: 1,
+    //   moduleType: 1 
+    // };
+    // const abc = JSON.stringify(data)
     console.log('Input----', userInput)
     // alert("hello");
     // axios.post('/api/gridoptions/griddata', {data},
     //           {headers:{'Content-Type': 'application/json'}}
     //           )
     axios.post('/api/gridoptions/griddata', userInput)
-    // .then((response) => {
-    //   console.log(response)
-    // })//, 
+    .then((response) => {
+      console.log(response)
+    })//, 
 
      //axios.post("/api/girdoptions/griddata", { energyPerDay: data[energyPerDay], inputRange: data.inputRange, moduleType: data.moduleType })
     // let navigate = useNavigate()
@@ -57,7 +57,7 @@ function Input(props) {
         <form autoComplete='off' onSubmit= {handleSubmit}>
           <span className="Watts">Choose the panel wattage  
           {/* <select className="input-range" name="inputRange" onSelect={e => setInputRange(e.target.value)}> */}
-          <select className="input-range" name="inputRange" onChange={handleChange}>
+          <select className="input-range" name="inputRange" onChange={handleChange} required>
             <option value="" disabled selected>
               Choose panel wattage range
             </option>
@@ -69,7 +69,8 @@ function Input(props) {
           </select>
           </span> 
           {/* <select className="module-type" name="moduleType" onSelect={e => setModuleType(e.target.value)}> */}
-          <select className="module-type" name="moduleType" onChange={handleChange}>
+          <select className="module-type" name="moduleType" onChange={handleChange} 
+          required>
             <option value="" disabled selected>
               Choose a panel type
             </option>
@@ -93,6 +94,7 @@ function Input(props) {
             placeholder="Units per Day in kWh"
             // value={userInput.energyPerDay}
             onChange={handleChange} 
+            required
             />
             </label>
           </p>
@@ -103,7 +105,7 @@ function Input(props) {
             <input className="area" name="area" type="text"></input>
           </p> */}
           <button className="calculate" 
-            onClick={(e)=>handleSubmit(e)}
+            type="submit"
           >Calculate</button>
           <br/>
 
