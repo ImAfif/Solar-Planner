@@ -33,7 +33,7 @@ function Input(props) {
     };
     const abc = JSON.stringify(data)
     e.preventDefault()
-    console.log('aaaaaaaaa', userInput)
+    console.log('Input----', userInput)
     // alert("hello");
     // axios.post('/api/gridoptions/griddata', {data},
     //           {headers:{'Content-Type': 'application/json'}}

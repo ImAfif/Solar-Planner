@@ -191,37 +191,71 @@ const combinationCompatibility = function (module, inverter) {
 
 
 
-const totalStrings = function(module, inverter) {
-  return Math.ceil(totalModules(module) / modulesInString(module, inverter))
+// const totalStrings = function(module, inverter) {
+//   return Math.ceil(totalModules(module) / modulesInString(module, inverter))
+// }
+
+const totalStrings = function(callback1, callback2) {
+  return Math.ceil(callback1 / callback2)
 }
 //console.log("modules in parallel: ",totalStrings(modules[3], inverters[1]))
 
 
-const comboPrice = function (module, inverter) {
-  const price = (module.Price * totalModules(module) )+ inverter.Price
+// const comboPrice = function (module, inverter) {
+//   const price = (module.Price * totalModules(module) )+ inverter.Price
+//   return price.toFixed(2)
+// }
+
+const comboPrice = function (module, inverter, callback) {
+  const price = (module.Price * callback )+ inverter.Price
   return price.toFixed(2)
 }
 
-const combo = function(modules, inverters) {
+// const combo = function(modules, inverters) {
+//   const comboArray = []
+//   inverters.forEach(inverter => {
+//     console.log('I am here also')
+//     modules.forEach(module => {
+//       console.log('I am here')
+//       const allNumberOfModules = totalModules(module)
+//       console.log(allNumberOfModules)
+//       const seriesModules = modulesInString(module, inverter)
+//       console.log(seriesModules)
+//       console.log('compatibility inside: ', combinationCompatibility(module, inverter))
+//       const modulesInParallel = totalStrings(module, inverter)
+//       //const results = {module, inverter, allNumberOfModules, seriesModules, modulesInParallel}
+//       const compatible = combinationCompatibility(module, inverter)
+//       const totalComboPrice = comboPrice(module, inverter)
+//       if (!compatible) {
+//         console.log('Not compatible')
+//         comboArray.push(false)
+//       }
+//        comboArray.push({module, inverter, allNumberOfModules, seriesModules, modulesInParallel, totalComboPrice})//results
+//   })
+// })
+// return comboArray
+// }
+
+const combo = function(modules, inverters, callback1, callback2, callback3, callback4, callback5) {
   const comboArray = []
   inverters.forEach(inverter => {
     console.log('I am here also')
-    modules.forEach(module => {
+    modules.forEach(panel => {
       console.log('I am here')
-      const allNumberOfModules = totalModules(module)
-      console.log(allNumberOfModules)
-      const seriesModules = modulesInString(module, inverter)
-      console.log(seriesModules)
-      console.log('compatibility inside: ', combinationCompatibility(module, inverter))
-      const modulesInParallel = totalStrings(module, inverter)
-      //const results = {module, inverter, allNumberOfModules, seriesModules, modulesInParallel}
-      const compatible = combinationCompatibility(module, inverter)
-      const totalComboPrice = comboPrice(module, inverter)
+      const allNumberOfpanels = callback1(panel)
+      console.log(allNumberOfpanels)
+      const seriespanels = callback2(panel, inverter)
+      console.log(seriespanels)
+      console.log('compatibility inside: ', callback3(panel, inverter))
+      const panelsInParallel = callback4(panel, inverter)
+      //const results = {panel, inverter, allNumberOfpanels, seriespanels, panelsInParallel}
+      const compatible = callback3(panel, inverter)
+      const totalComboPrice = callback5(panel, inverter)
       if (!compatible) {
         console.log('Not compatible')
         comboArray.push(false)
       }
-       comboArray.push({module, inverter, allNumberOfModules, seriesModules, modulesInParallel, totalComboPrice})//results
+       comboArray.push({panel, inverter, allNumberOfpanels, seriespanels, panelsInParallel, totalComboPrice})//results
   })
 })
 return comboArray

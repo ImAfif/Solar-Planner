@@ -17,27 +17,28 @@ function App() {
 
   const [state, setState] = useState({
     users: [],
-    modules: [],
-    inverters: [],
-    combos: {}
+    // modules: [],
+    // inverters: [],
+    combos: []
   })
 
   useEffect(() => {
     Promise.all([
       axios.get(`/api/users`),
-      axios.get(`/api/solarpanels`),
-      axios.get(`/api/inverters`),
-      axios.get(`/api/grid-options`),
-      axios.get(`/api/grid-options/griddata`)
+      // axios.get(`/api/solarpanels`),
+      // axios.get(`/api/inverters`),
+      // axios.get(`/api/grid-options`),
+      axios.get(`/api/gridoptions/griddata`)
     ]).then(response => {
-      console.log('response from database in react aap.js: -----',response);
+      console.log('response from database in react aap.js: -----',response[1].data);
       setState(prev => ({ ...prev, 
         users: response[0].data, 
-        modules: response[1].data, 
-        inverters: response[2].data, 
-        combos: response[3].data,
-        grid: response[4].data
+        // modules: response[1].data, 
+        // inverters: response[2].data, 
+        // combos: response[3].data,
+        combos: response[1].data
       }))
+
     });
   }, []);
 
@@ -48,7 +49,7 @@ function App() {
         
         <Routes>
           
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home {...state.combos}/>} />
           <Route path="/about" element={<About />} />
           {/* <Route path="/user/combo/:id" element={<Combo />} />
            */}
