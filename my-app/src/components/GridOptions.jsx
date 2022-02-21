@@ -2,13 +2,14 @@ import React from "react";
 import Combo from "./Combo";
 
 
-export default GridOptions = (props) => {
-
-
+export default function GridOptions (props) {
+  const {combos} = props;
+  const comboData = combos.map((combo) => <Combo {...combo} />)
+  
   return (
-   
-      <Combo {...props}/>
-    
-     
+    <ul>
+      {comboData}
+    </ul>
   )
 }
+

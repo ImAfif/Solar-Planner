@@ -23,7 +23,7 @@ const {
   // combo
 } = require("./helper_functions");
 
-const { getInverterArray, getPanelByInputRange } = require('/helpers/selectors')
+const { getInverterArray, getPanelByInputRange } = require('./helpers/selectors')
 
 
 module.exports = db => {

@@ -44,13 +44,13 @@ function App() {
 
   return (
     <div className="App">
-
+      
       <Router>
         
         <Routes>
           
-          <Route path="/" element={<Home {...state.combos}/>} />
-          <Route path="/about" element={<About />} />
+          <Route path="/" element={<Home {...state}/>} />
+          {/* <Route path="/about" element={<About />} /> */}
           {/* <Route path="/user/combo/:id" element={<Combo />} />
            */}
         </Routes>
