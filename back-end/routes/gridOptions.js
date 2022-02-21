@@ -1,10 +1,5 @@
-/*
- * All routes for Widgets are defined here
- * Since this file is loaded in server.js into api/widgets,
- *   these routes are mounted onto /widgets
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
 
+//const { Pool } = require("pg");
 const router = require("express").Router();
 const {
   powerNeededByLoad,
@@ -12,16 +7,19 @@ const {
   dcPowerInputToInverter,
   operationsLoss,
   powerPlantCapacity,
-  // inverterEstimatedRating,
+  inverterEstimatedRating,
   // selectedModulesFromDb,
-  // selectedInvertersFromDb,
   // totalModules,
+  // selectedInvertersFromDb,
   // modulesInString,
   // combinationCompatibility,
   // totalStrings,
   // comboPrice,
   // combo
 } = require("./helper_functions");
+
+const { getInverterArray, getPanelByInputRange, getComboByUserId, addCombo } = require('./helpers/selectors')
+
 
 module.exports = db => {
 
@@ -41,6 +39,13 @@ module.exports = db => {
       )
     })
   });
+
+  router.get("/griddata", ( req, res ) => {
+    const comboById = getComboByUserId(user_id)
+    res.json([
+      {comboById, id: 1, user_id: 1, inverter_id: 3, solar_panel_id: 4, power_req_kw: 20, estimated_loss_kw: 5, power_capacity_kw: 8}
+    ])
+  })
 
   router.post("/griddata", (req, res) => {
     console.log("We are reaching this function");
@@ -64,60 +69,59 @@ module.exports = db => {
 
     const f5 = powerPlantCapacity(f4, f3);
     console.log('f5: ',f5);
-    // if (process.env.TEST_ERROR) {
-    //   setTimeout(() => response.status(500).json({}), 1000);
-    //   return;
-    // }
 
+    const f6 = inverterEstimatedRating(f5);
+    console.log('f6: ',f6);
 
-    // // get data from input form
-    // const energy_required = req.body.energy;
-    // const area_available = req.body.area;
-    // const price = req.body.price;
-    // const low_range = 0;
-    // const high_range = 0;
-    // const panel_type = req.body.moduleType
-    // const type = () => {
-    //   if('abc' === 1) {
-    //     panel_type += 1
-
-    //   }
-    // }
-
-    // if (req.body.watts == 1) {
-    //   low_range = 150;
-    //   high_range = 200;
-    // } else if (req.body.watts == 2) {
-    //   low_range = 200;
-    //   high_range = 250;
-    // } else if (req.body.watts == 3) {
-    //   low_range = 250;
-    //   high_range = 300;
-    // } else if (req.body.watts == 4) {
-    //   low_range = 300;
-    //   high_range = 350;
-    // } else if (req.body.watts == 5) {
-    //   low_range = 350;
-    //   high_range = 400;
-    // }
-
-    // db.query(`SELECT * FROM solar_panels WHERE max_power > $1 AND max_power < $2;`, [low_range, high_range])
-    // .then(({ rows: solar_panels }) => {
-    //   res.json(solar_panels)
+    // const moduleDatafromDB = Promise.all([
+    //   db.query(`SELECT * FROM solar_panel_tech WHERE max_power_Wp < 200`),
+    //   db.query(`SELECT * FROM inverters WHERE max_power_Wp < 200`)])
+    //   .then(results => {
+    //   const solar_panels = results[0].rows
+    //   const inverters = results[1].rows
+    //   f7,
+    //   f14
     // })
 
-    // db.query(`SELECT * FROM inverters;`)
-    // .then(({ rows: inverters }) => {
-    //   res.json(inverters)
-    // })
-
-    // //impliment logic from Arvinds helper functions based upon input from user
 
 
-    // db.query(
-    //   `INSERT INTO grid_options
-    //   VALUES`
-    // )
+    // const f7 = selectedModulesFromDb(inputRange);
+    // console.log(inputRange)
+    // console.log('f7: ',f7);
+
+    //db.query(`INSERT  `)
+
+    //const panel = f7[2]
+    //console.log('panel: --', panel)
+    //const f8 = totalModules(panel, f6); // when calling in combo pass module as argument instead of panel
+   // console.log('f8: ',f8);
+
+
+    // const f9 = selectedInvertersFromDb(f6);
+    // console.log('f9: ',f9);
+
+
+    // //const inverter = f9[0]
+    // const f10 = modulesInString(panel, inverter);
+    // //console.log('f10: ',f10);
+
+
+    // const f11 = combinationCompatibility(panel, inverter);
+    // //console.log('f11: ',f11);
+
+
+    // const f12 = totalStrings(f8, f10); //check edge cases with real db data
+
+    // //console.log('f12: ',f12);
+
+
+    // const f13 = comboPrice(panel, inverter, f8);
+    //console.log('f13: ',f13);
+
+
+    // const f14 = combo(f7, f9, f8, f10, f11, f12, f13);
+    // console.log('f14: ',f14);
+
   })
 
   return router;

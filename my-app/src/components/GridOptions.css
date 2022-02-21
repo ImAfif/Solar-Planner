@@ -1,0 +1,7 @@
+.container1 {
+  background-color: seagreen;
+  border-radius: .5em;
+  padding: 2%;
+  flex: display;
+  align-items: center;
+}
