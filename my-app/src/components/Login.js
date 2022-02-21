@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import Navigation from "./Navigation";
 
 export default function Login() {
 
@@ -19,6 +20,7 @@ export default function Login() {
       } else {
         setLoginStatus(response.data[0].username);
       }
+      
     });
   };
 
@@ -31,6 +33,8 @@ export default function Login() {
   }, []);
 
   return (
+    <>
+    <Navigation />
     <form>
       <h1>Login</h1>
       <label>Email</label>
@@ -53,5 +57,6 @@ export default function Login() {
       />
       <button onClick={login}>Login</button>
     </form>
+    </>
   )
 }

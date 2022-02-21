@@ -13,24 +13,15 @@ nav {
   justify-content: flex-end;
   align-items: center;
 }
-.Home {
+.link {
   padding-right: 5em;
-}
-.Login {
-  padding-right: 5em;
-}
-
-.Register {
-  padding-right: 5em;
+  text-emphasis: none;
+  font-weight: bold;
+  color: #282c34;
+  text-decoration: none;
+  font-size: large;
 }
 
-.About {
-  padding-right: 5em;
-}
-
-.Store {
-  padding-right: 5em;
-}
 
 .solar {
   font-family: "Bungee Outline";
