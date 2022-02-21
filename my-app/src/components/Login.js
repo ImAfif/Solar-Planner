@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import Axios from "axios";
+import axios from "axios";
 
 export default function Login() {
 
@@ -7,10 +7,10 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState("");
 
-  Axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = true;
 
   const login = () => {
-    Axios.post("/users/login", {
+    axios.post("/users/login", {
       email: email,
       password: password,
     }).then((response) => {
@@ -23,7 +23,7 @@ export default function Login() {
   };
 
   useEffect(() => {
-    Axios.get("/login").then((response) => {
+    axios.get("/login").then((response) => {
       if (response.data.loggedIn === true) {
         setLoginStatus(response.data.user[0].username);
       }
