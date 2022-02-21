@@ -1,7 +1,6 @@
-//const { Pool } = require("pg");
 
 
-const getPanelByInputRange = (inputRange) => {
+const getPanelByInputRange = (inputRange, db) => {
   const queryString = `SELECT * FROM solar_panels WHERE max_power_Wp > $1 AND max_power_Wp <= $2`
 
   if (inputRange === '1') {
@@ -32,7 +31,7 @@ const getPanelByInputRange = (inputRange) => {
 
 
 
-exports.getPanelByInputRange = getPanelByInputRange
+
 
 const getInverterArray = (inverterEstimatedRating) => {
   const inverterUpperRange = inverterEstimatedRating * 1.25
@@ -44,21 +43,20 @@ const getInverterArray = (inverterEstimatedRating) => {
   .catch(e => console.log(e.message))
 }
 
-exports.getInverterArray = getInverterArray
 
-const getComboByUserId = (userId) => {
+
+const getComboByUserId = (userId, db) => {
   const queryString = `SELECT * FROM grid_options WHERE user_id === $1`;
 
-  return db
-  .query(queryString, [userId])
+  return db.query(queryString, [userId])
   .then(res => res.rows)
   .catch(e => console.log(e.message))
 }
 
-exports.getComboByUserId = getComboByUserId
 
 
-const addCombo = () => { //  <--- enter parameter
+
+const addCombo = (db) => { //  <--- enter parameter
   //let queryParams = [];
   let queryString = `INSERT INTO grid_options (user_id, inverter_id, solar_panel_id, power_needed_by_load, ac_power_output_from_inverter, dc_power_input_to_inverter, operations_loss, power_plant_capacity, inverter_estimated_rating) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, ) `;
 
@@ -75,3 +73,6 @@ const addCombo = () => { //  <--- enter parameter
 
 }
 exports.addCombo = addCombo;
+exports.getPanelByInputRange = getPanelByInputRange
+exports.getComboByUserId = getComboByUserId
+exports.getInverterArray = getInverterArray
