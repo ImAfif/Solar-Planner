@@ -6,6 +6,8 @@ import "./App.css";
 //import Combo from "./components/Combo";
 import Home from "./components/Home";
 import About from "./components/About";
+import Login from "./components/Login";
+import Register from "./components/Register";
 //import YoutubeEmbed from "./components/YoutubeEmbed";
 import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom';
 import axios from "axios";
@@ -53,6 +55,8 @@ function App() {
           {/* <Route path="/about" element={<About />} /> */}
           {/* <Route path="/user/combo/:id" element={<Combo />} />
            */}
+          <Route path='Login' element={<Login />} />
+          <Route path='/Register' element={<Register />} />
         </Routes>
       </Router>
     </div>
