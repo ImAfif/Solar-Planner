@@ -75,7 +75,7 @@ nav {
 .input-form {
   left: 1em;
   border-bottom: 5%;
-  border-radius: 2%;
+  border-radius: .5em;
   padding-left: 10px;
   padding-right: 20em;
   position: relative;
@@ -146,6 +146,7 @@ nav {
 .calculate {
   background-color: #8fe088;
   left: 3em;
+  border-radius: .25em;
 
 }
 

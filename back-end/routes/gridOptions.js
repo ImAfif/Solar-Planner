@@ -8,13 +8,13 @@ const {
   operationsLoss,
   powerPlantCapacity,
   inverterEstimatedRating,
-  // selectedModulesFromDb,
-  // totalModules,
-  // selectedInvertersFromDb,
-  // modulesInString,
-  // combinationCompatibility,
-  // totalStrings,
-  // comboPrice,
+  //selectedModulesFromDb,
+  totalModules,
+  selectedInvertersFromDb,
+  modulesInString,
+  combinationCompatibility,
+  totalStrings,
+  comboPrice,
   // combo
 } = require("./helper_functions");
 
@@ -40,18 +40,22 @@ module.exports = db => {
     })
   });
 
+  let results = {};
 
-  router.get("/griddata", ( req, res ) => {
-    const userId = req.cookies.userId
-    const comboById = getComboByUserId(userId, db)
-    res.json([
-      {comboById, id: 1, user_id: 1, inverter_id: 3, solar_panel_id: 4, power_req_kw: 20, estimated_loss_kw: 5, power_capacity_kw: 8}
-    ])
-  })
+
+  //const arr1 = [];
+  //const arr2 = [];
+  // router.get("/griddata", ( req, res ) => {
+  //   const userId = req.cookies.userId
+  //   const comboById = getComboByUserId(userId, db)
+  //   res.json([
+  //     {arr1, comboById, id: 1, user_id: 1, inverter_id: 3, solar_panel_id: 4, power_req_kw: 20, estimated_loss_kw: 5, power_capacity_kw: 8}
+  //   ])
+  // })
 
   router.post("/griddata", (req, res) => {
-    console.log("We are reaching this function");
-    console.log(req.body);
+    // console.log("We are reaching this function");
+    // console.log(req.body);
     const { energyPerDay, inputRange, moduleType } = req.body;
     console.log('engy type: -----', energyPerDay);
     const sunshineHoursPerDay = 3.3;
@@ -76,6 +80,25 @@ module.exports = db => {
     const f6 = inverterEstimatedRating(f5);
     console.log('f6: ',f6);
 
+    //arr1.push(energyPerDay, inputRange, moduleType, f1, f2, f3, f4, f5, f6);
+
+
+    //results = {energyPerDay: energyPerDay, inputRange: inputRange, moduleType: moduleType, f1: f1, f2: f2, f3: f3, f4: f4, f5: f5, f6: f6}
+    const sendValuesToDb = (db) => {
+      db.query(`INSERT INTO grid_options ( power_needed_by_load,
+        ac_power_output_from_inverter,
+        dc_power_input_to_inverter,
+        operations_loss,
+        power_plant_capacity,
+        inverter_estimated_rating,
+        combos_id) VALUES ($1, $2, $3, $5, $6, $7)`, [f1, f2, f3, f4, f5, f6, 1])
+        return db
+        .query(queryString, queryParams)
+        .then(res => res.rows)
+        .catch(e => console.error(e.message))
+        ))
+
+    }
 
     const f7 = getPanelByInputRange(inputRange, db).then(panels => console.log(panels))
 
@@ -84,41 +107,86 @@ module.exports = db => {
 
     // addCombo();
 
-    //db.query(`INSERT  `)
+    // console.log('inverterArray: ----',getInverterArray(db))
+    // const f9 = selectedInvertersFromDb(f6, getInverterArray(db))
 
-    //const panel = f7[2]
-    //console.log('panel: --', panel)
-
-    //const f8 = totalModules(panel, f6); // when calling in combo pass module as argument instead of panel
-   // console.log('f8: ',f8);
-
-
-    // const f9 = selectedInvertersFromDb(f6);
     // console.log('f9: ',f9);
 
+    // const combo = function(modulesPromise, invertersPromise) {
 
-    // //const inverter = f9[0]
-    // const f10 = modulesInString(panel, inverter);
-    // //console.log('f10: ',f10);
+    //   console.log("inside combo: ---",invertersPromise);
+    //   const comboArray = []
+    //   return invertersPromise.then(result => {
 
+    //   result.forEach(inverter => {
+    //     console.log('I am here ')
+    //     modulesPromise.then(result => {
+    //       result.forEach(module => {
+    //         console.log('I am here also')
 
-    // const f11 = combinationCompatibility(panel, inverter);
-    // //console.log('f11: ',f11);
+    //         const allNumberOfModules = totalModules(module, f6)
+    //         console.log(allNumberOfModules)
 
+    //         const seriesModules = modulesInString(module, inverter)
+    //         console.log(seriesModules)
+    //         //console.log('compatibility inside: ', combinationCompatibility(module, inverter))
 
-    // const f12 = totalStrings(f8, f10); //check edge cases with real db data
+    //         const modulesInParallel = totalStrings(module, inverter)
+    //         //const results = {module, inverter, allNumberOfModules, seriesModules, modulesInParallel}
 
-    // //console.log('f12: ',f12);
+    //         const compatible = combinationCompatibility(module, inverter)
 
+    //         const totalComboPrice = comboPrice(module, inverter, f8)
 
-    // const f13 = comboPrice(panel, inverter, f8);
-    //console.log('f13: ',f13);
+    //         if (!compatible) {
+    //           console.log('Not compatible')
+    //           comboArray.push(false)
+    //         } else {
+    //           comboArray.push({module, inverter, allNumberOfModules, seriesModules, modulesInParallel, totalComboPrice})//results
 
-
-    // const f14 = combo(f7, f9, f8, f10, f11, f12, f13);
-    // console.log('f14: ',f14);
+    //         }
+    //       })
+    //     })
+    //   })
+    // })
+    // return comboArray
+    // }
+    // console.log('combo func output: -----',combo(f7, f9))
 
   })
 
+  router.get("/griddata", ( req, res ) => {
+    res.json([
+      {results: results}
+    ])
+  })
+
+//   const combo = function(modulesPromise, invertersPromise) {
+
+//     const comboArray = []
+//     invertersPromise.forEach(inverter => {
+//       console.log('I am here also')
+//       modulesPromise.forEach(module => {
+//         console.log('I am here')
+//         const allNumberOfModules = totalModules(module, f6)
+//         console.log(allNumberOfModules)
+//         const seriesModules = modulesInString(module, inverter)
+//         console.log(seriesModules)
+//         console.log('compatibility inside: ', combinationCompatibility(module, inverter))
+//         const modulesInParallel = totalStrings(module, inverter)
+//         //const results = {module, inverter, allNumberOfModules, seriesModules, modulesInParallel}
+//         const compatible = combinationCompatibility(module, inverter)
+//         const totalComboPrice = comboPrice(module, inverter, f8)
+//         if (!compatible) {
+//           console.log('Not compatible')
+//           comboArray.push(false)
+//         }
+//          comboArray.push({module, inverter, allNumberOfModules, seriesModules, modulesInParallel, totalComboPrice})//results
+//     })
+//   })
+//   return comboArray
+//   }
+//   console.log('combo func output: -----',combo(f7, f9))
+// })
   return router;
 };
