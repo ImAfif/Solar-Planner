@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
+import GridOptions from "./GridOptions";
 
 function Input(props) {
   
@@ -15,6 +16,8 @@ function Input(props) {
     inputRange: '',
     moduleType: '' 
   })
+  const [optionsStateValue, setOptionsStateValue] = useState(false); 
+  const [gridOptionsStateValues, setGridOptionsStateValues] = useState(null);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -25,27 +28,21 @@ function Input(props) {
 
   }
 
+  let results = [];
   const handleSubmit = (e) => {
     e.preventDefault()
-    // const data = {
-    //   energyPerDay: props.energyPerDay,
-    //   inputRange: 1,
-    //   moduleType: 1 
-    // };
-    // const abc = JSON.stringify(data)
-    console.log('Input----', userInput)
-    // alert("hello");
-    // axios.post('/api/gridoptions/griddata', {data},
-    //           {headers:{'Content-Type': 'application/json'}}
-    //           )
+ 
     axios.post('/api/gridoptions/griddata', userInput)
     .then((response) => {
-      console.log(response)
+      console.log('from inside axios post: ----',response.data)
+     // results.push(response.data);
+     setOptionsStateValue(true);
+     const gridOptionsValues =  <GridOptions {...response.data} />
+     setGridOptionsStateValues(gridOptionsValues)
     })//, 
+    //console.log('results outside: ----', results);
 
-     //axios.post("/api/girdoptions/griddata", { energyPerDay: data[energyPerDay], inputRange: data.inputRange, moduleType: data.moduleType })
-    // let navigate = useNavigate()
-    // navigate('/user/combo/:id')
+
 
   }
   
@@ -114,6 +111,7 @@ function Input(props) {
             <input className="price" name="price" type="text"></input>
           </p> */}
         </form>
+        {optionsStateValue && gridOptionsStateValues}
       </div>
     </div>
   );

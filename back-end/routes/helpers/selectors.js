@@ -1,6 +1,7 @@
 
 
 const getPanelByInputRange = (inputRange, db) => {
+
   const queryString = `SELECT * FROM solar_panels WHERE max_power_Wp > $1 AND max_power_Wp <= $2;`
 
   if (inputRange === '1') {
@@ -36,7 +37,7 @@ const getPanelByInputRange = (inputRange, db) => {
 
 const getInverterArray = (db) => {
 
-  const queryString = `SELECT * FROM inverters ;`
+  const queryString = `SELECT * FROM inverters;`
 
   // WHERE (SELECT AVG(VMpp_range_min_V, VMpp_range_max_V) as avgRating WHERE avgRating > $1 AND avgRating <= $2)
 
