@@ -26,9 +26,9 @@ const getPanelByInputRange = (inputRange, db) => {
   }
 
   return db
-  .query(queryString, [low_range, high_range])
-  .then(res => res.rows)
-  .catch(e => console.log(e.message))
+    .query(queryString, [low_range, high_range])
+    .then(res => res.rows)
+    .catch(e => console.log(e.message))
 }
 
 
@@ -42,9 +42,9 @@ const getInverterArray = (db) => {
   // WHERE (SELECT AVG(VMpp_range_min_V, VMpp_range_max_V) as avgRating WHERE avgRating > $1 AND avgRating <= $2)
 
   return db
-  .query(queryString)
-  .then(res => res.rows)
-  .catch(e => console.log(e.message))
+    .query(queryString)
+    .then(res => res.rows)
+    .catch(e => console.log(e.message))
 }
 
 
@@ -54,8 +54,8 @@ const getComboByUserId = (userId, db) => {
   const queryString = `SELECT * FROM grid_options WHERE user_id === $1`;
 
   return db.query(queryString, [userId])
-  .then(res => res.rows)
-  .catch(e => console.log(e.message))
+    .then(res => res.rows)
+    .catch(e => console.log(e.message))
 }
 
 
@@ -72,9 +72,9 @@ const addCombo = (db) => { //  <--- enter parameter
   console.log(queryString, queryParams);
 
   return db
-  .query(queryString, queryParams)
-  .then(res => res.rows)
-  .catch(e => console.error(e.message))
+    .query(queryString, queryParams)
+    .then(res => res.rows)
+    .catch(e => console.error(e.message))
 
 }
 exports.addCombo = addCombo;

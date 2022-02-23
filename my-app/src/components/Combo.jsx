@@ -5,35 +5,36 @@ import Navigation from "./Navigation";
 
 
 export default function Combo(props) {
-  console.log('props reaching combo component: ---',props)
-  const { totalModules, modulesInString, combinationCompatibility, totalStrings, comboPrice, combo } = props;
-
+  console.log('props reaching combo component: ---', props)
+  //const { totalModules, modulesInString, combinationCompatibility, totalStrings, comboPrice, combo } = props;
+  const { module, inverter, allNumberOfModules, seriesModules, modulesInParallel, totalComboPrice } = props;
   // selectedModulesFromDb, selectedInvertersFromDb,  
   //const handleState 
 
   return (
 
     <div className="container2" name="container"><p>I am Combo component</p>
-    
-    <ul>
-    <h5>  Total number of modules needed for the power plant = #{totalModules}</h5>
-    </ul>
-    <ul>
-    <h5>  Modules in series = #{modulesInString}</h5>
-    </ul>
-    <ul>
-    <h5>  Is this combination of modules and inverter compatible or not = #{combinationCompatibility}</h5>
-    </ul>
-    <ul>
-    <h5>  Total number of modules in parallel = #{totalStrings}</h5>
-    </ul>
-    <ul>
-    <h5>  Combination Price = #{comboPrice}</h5> 
-    </ul>
-    <ul>
-    <h5>  Combo data = #{combo}</h5> 
-    </ul>
+
+      <ul>
+        <h5>  This combination of {module.manufacturer}, {module.model}, {module.max_power_wp} watt modules and {inverter.manufacturer}, {inverter.model}, {inverter.ac_ouput_power_kW} rating inverter is compatible </h5>
+      </ul>
+      <ul>
+        <h5>  For inverter = {inverter}</h5>
+      </ul>
+      <ul>
+        <h5>  Total number of modules needed for the power plant = {allNumberOfModules}</h5>
+      </ul>
+      <ul>
+        <h5>  Modules in series = {seriesModules}</h5>
+      </ul>
+      <ul>
+        <h5>  Total number of modules in parallel = {modulesInParallel}</h5>
+      </ul>
+      <ul>
+        <h5>  Combination Price = {totalComboPrice}</h5>
+      </ul>
+
     </div>
 
   )
-} 
+}

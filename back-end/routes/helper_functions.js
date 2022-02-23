@@ -19,7 +19,7 @@ const powerNeededByLoad = function (units, hours) {
 //   return (powerNeededByLoad(unitsNeededPerDay, sunshineHoursPerDay) / (1 - loss))
 // }
 
-const acPowerOutputFromInverter = function(value) {
+const acPowerOutputFromInverter = function (value) {
   const assumption = 5; // adding assumptions seprately to display them while displaying the function values, maybe below the displayed value
   const loss = assumption / 100;
   return (value / (1 - loss))
@@ -33,7 +33,7 @@ const acPowerOutputFromInverter = function(value) {
 //   return acPowerOutputFromInverter() / (1 - loss)
 // }
 
-const dcPowerInputToInverter = function(value) {
+const dcPowerInputToInverter = function (value) {
   const assumption = 5;
   const loss = assumption / 100;
   return value / (1 - loss)
@@ -77,12 +77,23 @@ const avg = function (a, b) {
 }
 
 //Inverter Fake data
-//const inverters = //{
-//   1: {'model name': 'model1', Vmax: 600, Vmpp: avg(400, 800), Imax: 35, Efficiency: 98.2, Pac: 5.6, Price: 1500},//Pac in kva
-//   2: {'model name': 'model2', Vmax: 400, Vmpp: avg(80, 100), Imax: 10, Efficiency: 98, Pac: 40, Price: 1600},
-//   3: {'model name': 'model3', Vmax: 600, Vmpp: avg(100, 160), Imax: 75, Efficiency: 97.5, Pac: 10, Price: 1100},
-//   4: {'model name': 'Pass4', Vmax: 600, Vmpp: avg(80, 120), Imax: 50, Efficiency: 97, Pac: 7.5, Price: 1200}
-// }
+const inverters = {
+  1: { 'manufacturer': 'abc', 'model name': 'model1', max_input_voltage: 600, Vmpp: avg(400, 800), Imax: 35, Efficiency: 98.2, ac_ouput_power_kW: 5.6, Price: 1500 },//ac_ouput_power_kW in kva
+  2: { 'manufacturer': 'abc', 'model name': 'model2', max_input_voltage: 400, Vmpp: avg(80, 100), Imax: 10, Efficiency: 98, ac_ouput_power_kW: 40, Price: 1600 },
+  3: { 'manufacturer': 'abc', 'model name': 'model3', max_input_voltage: 600, Vmpp: avg(100, 160), Imax: 75, Efficiency: 97.5, ac_ouput_power_kW: 10, Price: 1100 },
+  4: { 'manufacturer': 'abc', 'model name': 'Pass4', max_input_voltage: 600, Vmpp: avg(80, 120), Imax: 50, Efficiency: 97, ac_ouput_power_kW: 7.5, Price: 1200 },
+  5: { 'manufacturer': 'Must Energy Tech Co.', 'model': 'PH50-2500', max_input_voltage: 550, Vmpp: avg(80, 550), Imax: 11, Efficiency: 97.2, ac_ouput_power_kW: 5, price: 357 },
+  6: { 'manufacturer': 'K & C Solar', 'model': 'Fornius Primo UL', max_input_voltage: 1000, Vmpp: avg(220, 800), Imax: 51, Efficiency: 96.7, ac_ouput_power_kW: 35, price: 3100 },
+  7: { 'manufacturer': 'K & C Solar', 'model': 'SE3000H', max_input_voltage: 480, Vmpp: avg(150, 480), Imax: 13.5, Efficiency: 99.2, ac_ouput_power_kW: 8.6, price: 1600 },
+  8: { 'manufacturer': 'Huayu', 'model': 'HYH-7.6K-NA', max_input_voltage: 600, Vmpp: avg(60, 480), Imax: 15, Efficiency: 98, ac_ouput_power_kW: 25, price: 2550 },
+  9: { 'manufacturer': 'Test Data1', 'model': 'model1', max_input_voltage: 600, Vmpp: avg(400, 800), Efficiency: 98.2, Imax: 35, ac_ouput_power_kW: 5.6, price: 1500 },
+  10: { 'manufacturer': 'Test Data2', 'model': 'model2', max_input_voltage: 400, Vmpp: avg(80, 100), Efficiency: 98, Imax: 10, ac_ouput_power_kW: 40, price: 1600 },
+  11: { 'manufacturer': 'Test Data3', 'model': 'model3', max_input_voltage: 600, Vmpp: avg(100, 160), Efficiency: 97.5, Imax: 10, ac_ouput_power_kW: 15, price: 1100 },
+  12: { 'manufacturer': 'Test Data4', 'model': 'Pass4', max_input_voltage: 600, Vmpp: avg(80, 120), Efficiency: 97, Imax: 7.5, ac_ouput_power_kW: 30, price: 1200 }
+};
+
+
+
 //modules fake data
 // const modules = {
 //   1: {'model name': 'model1', Pm: 210, Voc: 41.59, Isc: 7.13, Vm: 33.81, Im: 6.21, Price: 100 },
@@ -99,7 +110,7 @@ const avg = function (a, b) {
 //   return (dcPowerInputToInverter() / (1 - safetyFactor));
 // }
 
-const inverterEstimatedRating = function(value) {
+const inverterEstimatedRating = function (value) {
   const assumption = 10
   const safetyFactor = assumption / 100
   return (value / (1 - safetyFactor));
@@ -107,31 +118,31 @@ const inverterEstimatedRating = function(value) {
 //console.log("inverter capacity: ",inverterEstimatedRating());
 
 
-const selectedModulesFromDb = function (inputRange) {
-  if (inputRange === '1') {
-    console.log('i am sending inputrange from inside the function: --', inputRange)
-    return Object.values(modules).filter(module =>
-      module.Pm <= 200 && module.Pm >= 140)
-  }
-  if (inputRange === '2') {
-    console.log('i am sending inputrange from inside the function: --', inputRange)
-    return Object.values(modules).filter(module => module.Pm <= 250 && module.Pm > 200)
-  }
-  if (inputRange === '3') {
-    console.log('i am sending inputrange from inside the function: --', inputRange)
-    return Object.values(modules).filter(module => module.Pm <= 300 && module.Pm > 250)
-  }
-  if (inputRange === '4') {
-    console.log('i am sending inputrange from inside the function: --', inputRange)
-    return Object.values(modules).filter(module => module.Pm <= 350 && module.Pm > 300)
+// const selectedModulesFromDb = function (inputRange) {
+//   if (inputRange === '1') {
+//     console.log('i am sending inputrange from inside the function: --', inputRange)
+//     return Object.values(modules).filter(module =>
+//       module.Pm <= 200 && module.Pm >= 140)
+//   }
+//   if (inputRange === '2') {
+//     console.log('i am sending inputrange from inside the function: --', inputRange)
+//     return Object.values(modules).filter(module => module.Pm <= 250 && module.Pm > 200)
+//   }
+//   if (inputRange === '3') {
+//     console.log('i am sending inputrange from inside the function: --', inputRange)
+//     return Object.values(modules).filter(module => module.Pm <= 300 && module.Pm > 250)
+//   }
+//   if (inputRange === '4') {
+//     console.log('i am sending inputrange from inside the function: --', inputRange)
+//     return Object.values(modules).filter(module => module.Pm <= 350 && module.Pm > 300)
 
-  }
-  if (inputRange === '5') {
-    console.log('i am sending inputrange from inside the function: --', inputRange)
-    return Object.values(modules).filter(module => module.Pm <= 400 && module.Pm > 350)
+//   }
+//   if (inputRange === '5') {
+//     console.log('i am sending inputrange from inside the function: --', inputRange)
+//     return Object.values(modules).filter(module => module.Pm <= 400 && module.Pm > 350)
 
-  }
-}
+//   }
+// }
 
 //console.log(selectedModulesFromDb(inputRange))
 
@@ -142,9 +153,9 @@ const selectedModulesFromDb = function (inputRange) {
 //   return Math.ceil((powerPlantCapacity() * 1000) / selectedModule.Pm)
 // }
 
-const totalModules = function(module, value) {
+const totalModules = function (module, value) {
   console.log('inside funct module.pm:  ----', module.Pm)
-  return Math.ceil((value  * 1000) / module.Pm)
+  return Math.ceil((value * 1000) / module.Pm)
 }
 //console.log('total modules: ', totalModules(modules[3]))
 
@@ -158,27 +169,40 @@ const totalModules = function(module, value) {
 //   )
 //   })
 // }
-const selectedInvertersFromDb = function (value, promise) {
-  console.log('returning promise from func: -----', promise)
-  return promise.then(result => {
-      Object.values(result).filter(inverter => {
-          const avgRating = (inverter.VMpp_range_min_V + inverter.VMpp_range_max_V) / 2;
-          return (
-              avgRating > value &&
-              avgRating < (value * 1.25)
-          )
-      })
+
+const selectedInvertersFromDb = function (value) {
+  return Object.values(inverters).filter(inverter => {
+    //console.log('invert Pac: ',inverter.Pac)
+    return (
+      inverter.ac_ouput_power_kW > value &&
+      inverter.ac_ouput_power_kW < (value * 1.25)
+    )
   })
 }
+
+// const selectedInvertersFromDb = function (value, promise) {
+//   console.log('returning promise from func: -----', promise)
+//   return promise.then(result => {
+//     console.log('inside helper func promise: ----',result)
+//       result.filter(inverter => {
+//           const avgRating = (inverter.VMpp_range_min_V + inverter.VMpp_range_max_V) / 2;
+//           console.log(avgRating);
+//           return (
+//               avgRating > value &&
+//               avgRating < (value * 1.25)
+//           )
+//       })
+//   })
+// }
 // const selectedInvertersFromDb = function (value, array) {
 //   console.log('returning array from func: -----', array)
 //   return array.filter(inverter => {
-//   console.log('invert --- ',inverter.VMpp_range_min_V, inverter.VMpp_range_max_V)
-//   const avgRating = (inverter.VMpp_range_min_V + inverter.VMpp_range_max_V) / 2;
-//   return (
-//     avgRating > value &&
-//     avgRating < (value * 1.25)
-//   )
+//     console.log('invert --- ', inverter.VMpp_range_min_V, inverter.VMpp_range_max_V)
+//     const avgRating = (inverter.VMpp_range_min_V + inverter.VMpp_range_max_V) / 2;
+//     return (
+//       avgRating > value &&
+//       avgRating < (value * 1.25)
+//     )
 //   })
 // }
 //console.log(selectedInvertersFromDb())
@@ -186,7 +210,7 @@ const selectedInvertersFromDb = function (value, promise) {
 
 
 
-const modulesInString = function (selectedModule, selectedInverters ) {
+const modulesInString = function (selectedModule, selectedInverters) {
   return Math.ceil(selectedInverters.Vmpp / selectedModule.Vm)
 }
 //console.log('modules in series: ' ,modulesInString(modules[3], inverters[1]))
@@ -209,7 +233,7 @@ const combinationCompatibility = function (module, inverter) {
 //   return Math.ceil(totalModules(module) / modulesInString(module, inverter))
 // }
 
-const totalStrings = function(value1, value2) {
+const totalStrings = function (value1, value2) {
   return Math.ceil(value1 / value2)
 }
 //console.log("modules in parallel: ",totalStrings(modules[3], inverters[1]))
@@ -221,7 +245,7 @@ const totalStrings = function(value1, value2) {
 // }
 
 const comboPrice = function (module, inverter, value) {
-  const price = (module.Price * value )+ inverter.Price
+  const price = (module.Price * value) + inverter.Price
   return price.toFixed(2)
 }
 
@@ -279,8 +303,9 @@ const comboPrice = function (module, inverter, value) {
 //console.log('combo: ', combo(selectedModulesFromDb(inputRange), selectedInvertersFromDb()))
 
 
-module.exports = { powerNeededByLoad, acPowerOutputFromInverter, dcPowerInputToInverter, operationsLoss, powerPlantCapacity, inverterEstimatedRating, selectedModulesFromDb, selectedInvertersFromDb, totalModules, modulesInString, combinationCompatibility, totalStrings, comboPrice }
+module.exports = { powerNeededByLoad, acPowerOutputFromInverter, dcPowerInputToInverter, operationsLoss, powerPlantCapacity, inverterEstimatedRating, selectedInvertersFromDb, totalModules, modulesInString, combinationCompatibility, totalStrings, comboPrice }
 
 
 
 
+//selectedModulesFromDb,
