@@ -7,6 +7,7 @@ import Input from "./Input";
 import GridOptions from "./GridOptions";
 
 export default function Home(props) {
+  console.log('home props: ---',props)
   return (
     <>
     <Navigation />
@@ -14,7 +15,7 @@ export default function Home(props) {
     <Showcase />
     <h1>Hi I am the home page</h1>
     <Input />
-    <GridOptions {...props}/>
+    {/* <GridOptions {...props}/> */}
     </>
   )
 }

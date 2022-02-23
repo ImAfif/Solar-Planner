@@ -1,7 +1,8 @@
 
 
 const getPanelByInputRange = (inputRange, db) => {
-  const queryString = `SELECT * FROM solar_panels WHERE max_power_Wp > $1 AND max_power_Wp <= $2`
+
+  const queryString = `SELECT * FROM solar_panels WHERE max_power_Wp > $1 AND max_power_Wp <= $2;`
 
   if (inputRange === '1') {
     high_range = 200;
@@ -23,6 +24,7 @@ const getPanelByInputRange = (inputRange, db) => {
     high_range = 400;
     low_range = 350;
   }
+
   return db
   .query(queryString, [low_range, high_range])
   .then(res => res.rows)
@@ -34,15 +36,18 @@ const getPanelByInputRange = (inputRange, db) => {
 
 
 
-const getInverterArray = (inverterEstimatedRating) => {
-  const inverterUpperRange = inverterEstimatedRating * 1.25
-  const queryString = `SELECT * FROM inverters WHERE AVG( VMpp_range_min_V, VMpp_range_max_V) > $1 AND AVG( VMpp_range_min_V, VMpp_range_max_V) < $2;`
+const getInverterArray = (db) => {
+
+  const queryString = `SELECT * FROM inverters;`
+
+  // WHERE (SELECT AVG(VMpp_range_min_V, VMpp_range_max_V) as avgRating WHERE avgRating > $1 AND avgRating <= $2)
 
   return db
-  .query(queryString, [inverterEstimatedRating, inverterUpperRange])
+  .query(queryString)
   .then(res => res.rows)
   .catch(e => console.log(e.message))
 }
+
 
 
 
@@ -61,9 +66,9 @@ const getComboByUserId = (userId, db) => {
 const addCombo = (db) => { //  <--- enter parameter
 
   //let queryParams = [];
-  let queryString = `INSERT INTO grid_options (user_id, inverter_id, solar_panel_id, power_needed_by_load, ac_power_output_from_inverter, dc_power_input_to_inverter, operations_loss, power_plant_capacity, inverter_estimated_rating) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, ) `;
+  let queryString = `INSERT INTO grid_options (user_id, power_needed_by_load, ac_power_output_from_inverter, dc_power_input_to_inverter, operations_loss, power_plant_capacity, inverter_estimated_rating, combos_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8 ) `;
 
-  let queryParams = [user_id, inverter_id, solar_panel_id, power_needed_by_load, ac_power_output_from_inverter, dc_power_input_to_inverter, operations_loss, power_plant_capacity, inverter_estimated_rating]
+  let queryParams = [db.user_id, db.power_needed_by_load, db.ac_power_output_from_inverter, db.dc_power_input_to_inverter, db.operations_loss, db.power_plant_capacity, db.inverter_estimated_rating, db.combos_id]
 
   // total_modules, modules_in_string, combination_compatibility, total_strings, combo_price, combo
 
