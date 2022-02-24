@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import GridOptions from "./GridOptions";
+import Combo from "./Combo";
 
 function Input(props) {
 
@@ -11,6 +12,8 @@ function Input(props) {
   })
   const [optionsStateValue, setOptionsStateValue] = useState(false);
   const [gridOptionsStateValues, setGridOptionsStateValues] = useState(null);
+  const [comboOptionsValue, setComboOptionsValue] = useState(null);
+  const [comboStateValue, setComboStateValue] = useState(false);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -30,8 +33,12 @@ function Input(props) {
         console.log('from inside axios post: ----', response.data)
         // results.push(response.data);
         setOptionsStateValue(true);
+        setComboStateValue(true);
         const gridOptionsValues = <GridOptions {...response.data} />
-        setGridOptionsStateValues(gridOptionsValues)
+        const comboOptionsValues = <Combo {...response.data.f11} />
+        setGridOptionsStateValues(gridOptionsValues);
+        setComboOptionsValue(comboOptionsValues);
+        
       })//, 
     //console.log('results outside: ----', results);
 
@@ -83,6 +90,7 @@ function Input(props) {
 
         </form>
         {optionsStateValue && gridOptionsStateValues}
+        {comboStateValue && comboOptionsValue}
       </div>
     </div>
   );

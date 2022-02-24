@@ -154,8 +154,8 @@ const inverterEstimatedRating = function (value) {
 // }
 
 const totalModules = function (module, value) {
-  console.log('inside funct module.pm:  ----', module.Pm)
-  return Math.ceil((value * 1000) / module.Pm)
+  console.log('inside funct module.pm:  ----', module.max_power_wp)
+  return Math.ceil((value * 1000) / module.max_power_wp)
 }
 //console.log('total modules: ', totalModules(modules[3]))
 
@@ -211,7 +211,7 @@ const selectedInvertersFromDb = function (value) {
 
 
 const modulesInString = function (selectedModule, selectedInverters) {
-  return Math.ceil(selectedInverters.Vmpp / selectedModule.Vm)
+  return Math.ceil(selectedInverters.Vmpp / selectedModule.max_voltage_V)
 }
 //console.log('modules in series: ' ,modulesInString(modules[3], inverters[1]))
 
@@ -219,7 +219,7 @@ const modulesInString = function (selectedModule, selectedInverters) {
 
 const combinationCompatibility = function (module, inverter) {
 
-  if (modulesInString(module, inverter) * module.Vm < inverter.Vmpp) {
+  if (modulesInString(module, inverter) * module.max_voltage_V < inverter.Vmpp) {
     return true //if changed Vmp is in range of the selected inverter's Vmp then fine else not compatible
   }
   return false
@@ -245,7 +245,7 @@ const totalStrings = function (value1, value2) {
 // }
 
 const comboPrice = function (module, inverter, value) {
-  const price = (module.Price * value) + inverter.Price
+  const price = (module.price * value) + inverter.Price
   return price.toFixed(2)
 }
 

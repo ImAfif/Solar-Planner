@@ -18,6 +18,36 @@ const {
 
 const { getInverterArray, getPanelByInputRange, getComboByUserId, addCombo } = require('./helpers/selectors')
 
+const combo = function (modulesPromise, inverters, value) {
+console.log('invert -------', inverters)
+  const comboArray = []
+  inverters.forEach(inverter => {
+
+  //  modulesPromise.then(result => {
+
+    modulesPromise.map(module => {
+
+        const allNumberOfModules = totalModules(module, value)
+        console.log('total panels from inside func combo: ---',allNumberOfModules)
+
+        const seriesModules = modulesInString(module, inverter)
+
+        const modulesInParallel = totalStrings(allNumberOfModules, seriesModules)
+
+        const compatible = combinationCompatibility(module, inverter)
+
+        const totalComboPrice = comboPrice(module, inverter, modulesInParallel)
+
+        if (!compatible) {
+
+          comboArray.push(false)
+        }
+        comboArray.push({ module, inverter, allNumberOfModules, seriesModules, modulesInParallel, totalComboPrice })//results
+      })
+    })
+  // })
+  return comboArray
+}
 
 module.exports = db => {
 
@@ -33,7 +63,7 @@ module.exports = db => {
   });
 
 
-  router.post("/griddata", (req, res) => {
+  router.post("/griddata", async (req, res) => {
 
     const { energyPerDay, inputRange, moduleType } = req.body;
 
@@ -51,10 +81,10 @@ module.exports = db => {
 
     const f6 = inverterEstimatedRating(f5).toFixed(2);
 
-    const f7 = getPanelByInputRange(inputRange, db).then(panels => console.log(panels))
+    const f7 = await getPanelByInputRange(inputRange, db);
 
     // console.log(inputRange)
-    console.log('f7: ', f7);
+    //console.log('f7: ', f7);
 
     // console.log('inverterArray: ----', getInverterArray(db))
     //  const f9 = getInverterArray(db).then(inverters => {
@@ -78,92 +108,13 @@ module.exports = db => {
     // })
 
     const f9 = selectedInvertersFromDb(f6)
-    console.log('f9: ', f9);
-    //  const f10 = selectedInvertersFromDb(f6, f9)//.then(inverters1 => console.log(inverters1))
 
-    //  console.log('f10: ', f10);
+    const f11 = combo(f7, f9, f6);
 
-    // const combo = function (modulesPromise, invertersPromise) {
-
-    //   //console.log("inside combo: ---", invertersPromise);
-    //   const comboArray = []
-    //   return invertersPromise.then(result => {
-
-    //     result.forEach(inverter => {
-    //       //console.log('I am here ')
-    //       modulesPromise.then(result => {
-    //         result.forEach(module => {
-    //          // console.log('I am here also')
-
-    //           const allNumberOfModules = totalModules(module, f6)
-    //          // console.log(allNumberOfModules)
-
-    //           const seriesModules = modulesInString(module, inverter)
-    //          // console.log(seriesModules)
-    //           //console.log('compatibility inside: ', combinationCompatibility(module, inverter))
-
-    //           const modulesInParallel = totalStrings(module, inverter)
-    //           //const results = {module, inverter, allNumberOfModules, seriesModules, modulesInParallel}
-
-    //           const compatible = combinationCompatibility(module, inverter)
-
-    //           const totalComboPrice = comboPrice(module, inverter, f8)
-
-    //           if (!compatible) {
-    //          //   console.log('Not compatible')
-    //             comboArray.push(false)
-    //           } else {
-    //             comboArray.push({ module, inverter, allNumberOfModules, seriesModules, modulesInParallel, totalComboPrice })//results
-
-    //           }
-    //         })
-    //       })
-    //     })
-    //   })
-    //   // return comboArray
-    // }
-
-    // console.log('combo is : ---',combo(f7, f9))
+console.log('f11 ----',f11);
 
 
-    const combo = function (modulesPromise, inverters) {
 
-      const comboArray = []
-      inverters.forEach(inverter => {
-        console.log('I am here also')
-
-        modulesPromise.then(result => {
-          result.map(module => {
-            console.log('I am here')
-
-            const allNumberOfModules = totalModules(module, f6)
-            console.log(allNumberOfModules)
-
-            const seriesModules = modulesInString(module, inverter)
-            console.log(seriesModules)
-            console.log('compatibility inside: ', combinationCompatibility(module, inverter))
-
-            const modulesInParallel = totalStrings(module, inverter)
-            //const results = {module, inverter, allNumberOfModules, seriesModules, modulesInParallel}
-            const compatible = combinationCompatibility(module, inverter)
-
-            const totalComboPrice = comboPrice(module, inverter, f8)
-
-            if (!compatible) {
-              console.log('Not compatible')
-              comboArray.push(false)
-            }
-            comboArray.push({ module, inverter, allNumberOfModules, seriesModules, modulesInParallel, totalComboPrice })//results
-          }).then(result => console.log(result))
-        })
-      })
-      return comboArray
-    }
-    console.log('combo func output: -----', combo(f7, f9))
-    const f11 = combo(f7, f9);
-
-
-    //    console.log('combo func output: -----', combo(f7, f9))
     res.send({ energyPerDay: energyPerDay, inputRange: inputRange, moduleType: moduleType, f1: f1, f2: f2, f3: f3, f4: f4, f5: f5, f6: f6, f11: f11 })
 
   })
