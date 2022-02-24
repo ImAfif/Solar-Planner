@@ -10,9 +10,8 @@ export default function Home(props) {
   return (
     <>
       <Navigation />
-      <YoutubeEmbed embedId="rokGy0huYEA" />
+      <YoutubeEmbed embedId="HciKU63dLtA" />
       {/* <Showcase /> */}
-      <h1>Hi I am the home page</h1>
       <Input />
     </>
   )

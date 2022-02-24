@@ -1,5 +1,6 @@
 .container1 {
   background-color: seagreen;
+  color: aquamarine;
   border-radius: .5em;
   padding: 2%;
   flex: display;

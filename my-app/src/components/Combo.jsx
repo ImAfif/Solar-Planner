@@ -19,16 +19,18 @@ export default function Combo(props) {
       <>
       {/* {nullCombo && <div><p> Sorry an error occuoured Plese try again</p></div>} */}
         <li>
-          <h5>  This combination of {module.model}, {module.max_power_wp} watt modules and {inverter.manufacturer} make, {inverter.model} model, {inverter.ac_ouput_power_kW} rating inverter is compatible with the following design calculations.</h5>
+          <h5>  This combination of: 
+            <p> '{module.model}' model, {module.max_power_wp} watt modules with {inverter.manufacturer} make, {inverter.model} model, {inverter.ac_ouput_power_kW} rating inverter. </p> 
+            </h5>
         </li>
         <li>
           <h5>  Total number of solar panels needed for the power plant = {allNumberOfModules}</h5>
         </li>
         <li>
-          <h5>  Solar panels in series or number of strings = {seriesModules}</h5>
+          <h5>  Solar panels in series = {seriesModules}</h5>
         </li>
         <li>
-          <h5>  Total number of solar panels in parallel or number of solar panels in a string = {modulesInParallel}</h5>
+          <h5>  Total number of solar panels in parallel = {modulesInParallel}</h5>
         </li>
         <li>
           <h5>  Combination Price in $ = {totalComboPrice}</h5>

@@ -127,10 +127,10 @@ nav {
 }
 
 .video-responsive iframe {
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
+  left: 10%;
+  top: 5%;
+  height: 85%;
+  width: 85%;
   position: absolute;
 }
 
