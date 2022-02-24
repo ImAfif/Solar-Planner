@@ -5,7 +5,7 @@ import "./GridOptions.css";
 
 export default function GridOptions(props) {
 
-  const calculatedValues = [];
+  
   const { energyPerDay, f1, f2, f3, f4, f5, f6, f11 } = props;
 
   const newF11 = f11.filter(item => item !== false)
