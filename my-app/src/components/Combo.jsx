@@ -4,30 +4,33 @@ import "./Combo.css"
 
 
 export default function Combo(props) {
+  if(!props.combo) {
+    return null;
+  }
   console.log('props reaching combo component: ---', props)
   console.log('props.combo ------',props.combo)
- const {combo} = props.combo;
-//  const gridCombo = combo.map(com => {
-//const { allNumberOfModules, seriesModules, modulesInParallel, totalComboPrice } = combo;
-//     return (
-//       <>
-//       <ul>
-//         <h5>  Total number of modules needed for the power plant = {com.allNumberOfModules}</h5>
-//       </ul>
-//       <ul>
-//         <h5>  Modules in series = {com.seriesModules}</h5>
-//       </ul>
-//       <ul>
-//         <h5>  Total number of modules in parallel = {com.modulesInParallel}</h5>
-//       </ul>
-//       <ul>
-//         <h5>  Combination Price = {com.totalComboPrice}</h5>
-//       </ul>
+ //const combo = props.combo;
+ const gridCombo = () => {
+  const { allNumberOfModules, seriesModules, modulesInParallel, totalComboPrice } = props.combo;
+  return (
+    <>
+    <ul>
+      <h5>  Total number of modules needed for the power plant = {allNumberOfModules}</h5>
+    </ul>
+    <ul>
+      <h5>  Modules in series = {seriesModules}</h5>
+    </ul>
+    <ul>
+      <h5>  Total number of modules in parallel = {modulesInParallel}</h5>
+    </ul>
+    <ul>
+      <h5>  Combination Price = {totalComboPrice}</h5>
+    </ul>
 
-//       </>
-//     )
-//   }) 
-  console.log('num panels: -----', combo.allNumberOfModules);
+    </>
+  )
+ }
+
   
 
   return (
@@ -40,9 +43,9 @@ export default function Combo(props) {
       {/* <ul>
         <h5>  For inverter = {inverter}</h5>
       </ul>  */}
-      <ul>
+      {/* <ul>
         <h5>  Total number of modules needed for the power plant = {combo.allNumberOfModules}</h5>
-      </ul>
+      </ul> */}
       {/* <ul>
         <h5>  Modules in series = {seriesModules}</h5>
       </ul>
@@ -52,7 +55,7 @@ export default function Combo(props) {
       <ul>
         <h5>  Combination Price = {totalComboPrice}</h5> */}
       {/* </ul> */}
-      {/* {gridCombo} */}
+      {gridCombo()}
 
     </div>
 
