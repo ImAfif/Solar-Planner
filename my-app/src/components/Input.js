@@ -44,30 +44,29 @@ function Input() {
   return (
     <div className="container">
       <div className="input-form">
-        <h2>Input Form</h2>
         <form autoComplete='off' onSubmit={handleSubmit}>
-          <span className="Watts">Choose the panel wattage
+            <label className="label">Choose Panel Wattage</label>
             <select className="input-range" name="inputRange" onChange={handleChange} required>
               <option value="" disabled selected>
-                Choose panel wattage range
+                Please choose wattage...
               </option>
-              <option value="1">150 - 200</option>
-              <option value="2">200 - 250 </option>
-              <option value="3">250 - 300</option>
-              <option value="4">300 - 350</option>
-              <option value="5">350 - 400</option>
+              <option value="1">150W - 200W</option>
+              <option value="2">200W - 250W</option>
+              <option value="3">250W - 300W</option>
+              <option value="4">300W - 350W</option>
+              <option value="5">350W - 400W</option>
             </select>
-          </span>
+          <label>Choose Panel Type</label>
           <select className="module-type" name="moduleType" onChange={handleChange}
             required>
             <option value="" disabled selected>
-              Choose a panel type
+              Please choose type...
             </option>
             <option value="1">Crystaline modules</option>
             <option value="2">Thin film modules</option>
           </select>
           <p>
-            <label className="Energy-required">Energy Required
+            <label className="Energy-required">Energy Required (kWh)</label>
               <input
                 className="energy"
                 name="energyPerDay"
@@ -76,7 +75,6 @@ function Input() {
                 onChange={handleChange}
                 required
               />
-            </label>
           </p>
           <button className="calculate"
             type="submit"

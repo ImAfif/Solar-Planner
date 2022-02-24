@@ -25,12 +25,13 @@ nav {
 
 .solar {
   font-family: "Bungee Outline";
-  position: absolute;
+  margin-right: 25em;
   left: 3em;
   font-weight: bolder;
   font-size: xx-large;
   color: rgb(0, 0, 0);
   bottom: 1183px;
+
 }
 
 .wrapper {
@@ -65,13 +66,17 @@ nav {
 
 .input-form {
   left: 1em;
-  border-bottom: 5%;
+  border-bottom: 1em;
   border-radius: .5em;
   padding-left: 10px;
   padding-right: 20em;
+  padding-bottom: 1em;
   position: relative;
-  background-color: #8fe088;
   color: rgba(22, 91, 170, 0.918);
+}
+
+.label{
+  margin-right: .1em;
 }
 
 .App-header {
@@ -84,44 +89,16 @@ nav {
   top: 40em;
 }
 
-.Energy-required {
-  display: flex;
-  left: 3em;
+.solar-calculator{
   position: relative;
-  
+  margin-left: 18em;
+  margin-top: 0.5em;
 }
 
-.area {
-  display: flex;
-  position: relative;
-  left: 4em;
-  top: 4em;
-}
-
-.Area-available {
-  display: flex;
-  left: 3em;
-  position: relative;
-  top: 3em;
-}
-
-.price {
-  display: flex;
-  position: relative;
-  left: 4em;
-  top: 52em;
-}
-
-.price-question {
-  display: flex;
-  left: 3em;
-  position: relative;
-  top: 42em;
-}
 
 .video-responsive {
   overflow: inherit;
-  padding-bottom: 56.25%;
+  padding-bottom: 25em;
   position: relative;
   height: 0;
 }
@@ -129,15 +106,23 @@ nav {
 .video-responsive iframe {
   left: 0;
   top: 0;
-  height: 100%;
-  width: 100%;
-  position: absolute;
+  height: 25em;
+  width: 50%;
+  margin-left: 448px;
+  margin-top: 10px;
+  margin-bottom: 4em;
+  position: relative;
+  border-radius: 0.5em;
 }
 
 .calculate {
   background-color: #8fe088;
   left: 3em;
   border-radius: .25em;
-
+  margin-bottom: 1em;
 }
 
+.calculate:hover{
+  background-color: rgba(22, 91, 170, 0.918);
+  box-shadow: 0.25;
+}

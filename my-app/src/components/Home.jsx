@@ -10,9 +10,8 @@ export default function Home(props) {
   return (
     <>
       <Navigation />
-      <YoutubeEmbed embedId="rokGy0huYEA" />
-      <Showcase />
-      <h1>Hi I am the home page</h1>
+      <YoutubeEmbed embedId="HciKU63dLtA" />
+      <h1 className="solar-calculator">Solar Calculator</h1>
       <Input />
     </>
   )

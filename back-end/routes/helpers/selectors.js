@@ -30,7 +30,7 @@ const getPanelByInputRange = (inputRange, moduleType, db) => {
     .then(res => res.rows)
     .catch(e => console.log(e.message))
 }
-}
+
 
 
 
