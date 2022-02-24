@@ -13,92 +13,7 @@ nav {
   justify-content: flex-end;
   align-items: center;
 }
-.link {
-  padding-right: 5em;
-  text-emphasis: none;
-  font-weight: bold;
-  color: #282c34;
-  text-decoration: none;
-  font-size: large;
-}
-
-
-.solar {
-  font-family: "Bungee Outline";
-  position: absolute;
-  left: 3em;
-  font-weight: bolder;
-  font-size: xx-large;
-  color: rgb(0, 0, 0);
-  bottom: 1183px;
-}
-
-.wrapper {
-  background: #efefef;
-  box-shadow: 1px 1px 10px #999;
-  margin: auto;
-  text-align: center;
-  position: relative;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  width: 95%;
-  padding-top: 5px;
-  margin-top: 6em;
-}
-.scrolls {
-  overflow-x: scroll;
-  height: 180px;
-  white-space: nowrap;
-}
-.imageDiv img {
-  box-shadow: 1px 1px 10px #999;
-  margin: 2px;
-  max-height: 50px;
-  cursor: pointer;
-  display: inline-block;
-  *display: inline;
-  *zoom: 1;
-  vertical-align: top;
-}
-
-.input-form {
-  left: 1em;
-  border-bottom: 5%;
-  border-radius: .5em;
-  padding-left: 10px;
-  padding-right: 20em;
-  position: relative;
-  background-color: #8fe088;
-  color: rgba(22, 91, 170, 0.918);
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-
-  display: flex;
-  position: relative;
-  left: 4em;
-  top: 40em;
-}
-
-.Energy-required {
-  display: flex;
-  left: 3em;
-  position: relative;
-  
-}
-
-.area {
-  display: flex;
-  position: relative;
-  left: 4em;
-  top: 4em;
-}
-
-.Area-available {
+.label {
   display: flex;
   left: 3em;
   position: relative;
@@ -158,24 +73,8 @@ nav {
   justify-content: flex-end;
   align-items: center;
 }
-.Home {
-  padding-right: 5em;
-}
-.Login {
-  padding-right: 5em;
-}
 
-.Register {
-  padding-right: 5em;
-}
 
-.About {
-  padding-right: 5em;
-}
-
-.Store {
-  padding-right: 5em;
-}
 
 .solar {
   font-family: "Bungee Outline";
