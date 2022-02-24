@@ -13,14 +13,67 @@ nav {
   justify-content: flex-end;
   align-items: center;
 }
-.link {
-  padding-right: 5em;
-  text-emphasis: none;
-  font-weight: bold;
-  color: #282c34;
-  text-decoration: none;
-  font-size: large;
+.label {
+  display: flex;
+  left: 3em;
+  position: relative;
+  top: 3em;
 }
+
+.price {
+  display: flex;
+  position: relative;
+  left: 4em;
+  top: 52em;
+}
+
+.price-question {
+  display: flex;
+  left: 3em;
+  position: relative;
+  top: 42em;
+}
+
+.video-responsive {
+  overflow: inherit;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+
+.video-responsive iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.calculate {
+  background-color: #8fe088;
+  left: 3em;
+  border-radius: .25em;
+
+}
+
+
+
+/* nav {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  height: 75px;
+  background: #8fe088;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: stretch;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 
 
 .solar {
@@ -140,4 +193,4 @@ nav {
   border-radius: .25em;
 
 }
-
+ */

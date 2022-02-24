@@ -1,7 +1,7 @@
 import React from "react";
 import Navigation from "./Navigation";
 import YoutubeEmbed from "./YoutubeEmbed";
-import Showcase from "./Showcase";
+// import Showcase from "./Showcase";
 import Input from "./Input";
 
 
@@ -11,7 +11,7 @@ export default function Home(props) {
     <>
       <Navigation />
       <YoutubeEmbed embedId="rokGy0huYEA" />
-      <Showcase />
+      {/* <Showcase /> */}
       <h1>Hi I am the home page</h1>
       <Input />
     </>

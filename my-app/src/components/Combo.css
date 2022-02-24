@@ -2,4 +2,12 @@
   background-color: aquamarine;
   padding: 3%;
   border-radius: .5em;
+  flex: display;
+  flex-direction: column;
+  align-content: space-around;
+}
+
+.comboComponent {
+  margin: 0.5rem 0;
+
 }
