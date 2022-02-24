@@ -7,11 +7,10 @@ export default function GridOptions(props) {
 
   const calculatedValues = [];
   const { f1, f2, f3, f4, f5, f6, f11 } = props;
- 
+
   const newF11 = f11.filter(item => item !== false)
   console.log('newF11: ----', newF11);
   const comboData = newF11.map((combo) => {
-  
 
     return <Combo combo={combo} />
 

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import GridOptions from "./GridOptions";
 import Combo from "./Combo";
 
-function Input(props) {
+function Input() {
 
   const [userInput, setUserInput] = useState({
     energyPerDay: '',
@@ -24,14 +24,12 @@ function Input(props) {
 
   }
 
-  let results = [];
   const handleSubmit = (e) => {
     e.preventDefault()
 
     axios.post('/api/gridoptions/griddata', userInput)
       .then((response) => {
-        console.log('from inside axios post: ----', response.data)
-        // results.push(response.data);
+        
         setOptionsStateValue(true);
         setComboStateValue(true);
         const gridOptionsValues = <GridOptions {...response.data} />
@@ -39,10 +37,7 @@ function Input(props) {
         setGridOptionsStateValues(gridOptionsValues);
         setComboOptionsValue(comboOptionsValues);
         
-      })//, 
-    //console.log('results outside: ----', results);
-
-
+      })
 
   }
 
