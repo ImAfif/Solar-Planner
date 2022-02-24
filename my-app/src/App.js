@@ -1,63 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-// import Navigation from "./components/Navigation";
-// import Showcase from "./components/Showcase";
-// import Input from "./components/Input";
-//import Combo from "./components/Combo";
 import Home from "./components/Home";
-import About from "./components/About";
-import Login from "./components/Login";
-import Register from "./components/Register";
-//import YoutubeEmbed from "./components/YoutubeEmbed";
 import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom';
-import axios from "axios";
-
-
 
 function App() {
 
-
-  const [state, setState] = useState({
-    users: [],
-    // modules: [],
-    // inverters: [],
-    combos: []
-  })
-
-  // useEffect(() => {
-  //   Promise.all([
-  //     axios.get(`/api/users`),
-  //     // axios.get(`/api/solarpanels`),
-  //     // axios.get(`/api/inverters`),
-  //     // axios.get(`/api/grid-options`),
-  //     axios.get(`/api/gridoptions/griddata`)
-  //   ]).then(response => {
-  //     console.log('app response: ----', response)
-  //    // console.log('response from database in react aap.js: -----',response[1].data);
-  //     setState(prev => ({ ...prev, 
-  //       users: response[0].data, 
-  //       // modules: response[1].data, 
-  //       // inverters: response[2].data, 
-  //       // combos: response[3].data,
-  //       combos: response[1].data
-  //     }))
-
-  //   });
-  // }, []);
-
   return (
     <div className="App">
-      
       <Router>
-        
         <Routes>
-          
-          <Route path="/" element={<Home {...state}/>} />
-          {/* <Route path="/about" element={<About />} /> */}
-          {/* <Route path="/user/combo/:id" element={<Combo />} />
-           */}
-          <Route path='Login' element={<Login />} />
-          <Route path='/Register' element={<Register />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </Router>
     </div>

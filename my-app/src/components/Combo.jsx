@@ -1,39 +1,49 @@
 import React from "react";
 import "./Combo.css"
-import Navigation from "./Navigation";
-//import { powerNeededByLoad, acPowerOutputFromInverter, dcPowerInputToInverter, operationsLoss, powerPlantCapacity, inverterEstimatedRating, selectedModulesFromDb, selectedInvertersFromDb, totalModules, modulesInString, combinationCompatibility, totalStrings, comboPrice, combo } from '../helper_functions';
+
 
 
 export default function Combo(props) {
-  console.log('props reaching combo component: ---',props)
-  const { totalModules, modulesInString, combinationCompatibility, totalStrings, comboPrice, combo } = props;
+  if (!props.combo) {
+    return null;
+  }
 
-  // selectedModulesFromDb, selectedInvertersFromDb,  
-  //const handleState 
+  const gridCombo = () => {
+
+    const { module, inverter, allNumberOfModules, seriesModules, modulesInParallel, totalComboPrice } = props.combo;
+    
+    return (
+      <>
+        <ul>
+          <h5>  This combination of {module.model}, {module.max_power_wp} watt modules and {inverter.manufacturer}, {inverter.model}, {inverter.ac_ouput_power_kW} rating inverter is compatible </h5>
+        </ul>
+        <ul>
+          <h5>  Total number of modules needed for the power plant = {allNumberOfModules}</h5>
+        </ul>
+        <ul>
+          <h5>  Modules in series = {seriesModules}</h5>
+        </ul>
+        <ul>
+          <h5>  Total number of modules in parallel = {modulesInParallel}</h5>
+        </ul>
+        <ul>
+          <h5>  Combination Price in $ = {totalComboPrice}</h5>
+        </ul>
+
+      </>
+    )
+  }
+
+
 
   return (
 
-    <div className="container2" name="container"><p>I am Combo component</p>
-    
-    <ul>
-    <h5>  Total number of modules needed for the power plant = #{totalModules}</h5>
-    </ul>
-    <ul>
-    <h5>  Modules in series = #{modulesInString}</h5>
-    </ul>
-    <ul>
-    <h5>  Is this combination of modules and inverter compatible or not = #{combinationCompatibility}</h5>
-    </ul>
-    <ul>
-    <h5>  Total number of modules in parallel = #{totalStrings}</h5>
-    </ul>
-    <ul>
-    <h5>  Combination Price = #{comboPrice}</h5> 
-    </ul>
-    <ul>
-    <h5>  Combo data = #{combo}</h5> 
-    </ul>
+    <div className="container2" name="container">
+      <p>I am Combo component</p>
+
+      {gridCombo()}
+
     </div>
 
   )
-} 
+}
