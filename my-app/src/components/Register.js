@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Axios from "axios";
 import "../App.css";
+import Navigation from "./Navigation";
 
 export default function Register() {
   const [nameReg, setNameReg] = useState("");
@@ -25,6 +26,8 @@ export default function Register() {
 
 
   return (
+    <>
+    <Navigation />
       <form>
         <h1>Register</h1>
         <label>Name</label>
@@ -56,5 +59,6 @@ export default function Register() {
         />
         <button onClick={register}>Register</button>
       </form>
+    </>
   )
 }
