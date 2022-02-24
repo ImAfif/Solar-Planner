@@ -84,9 +84,13 @@ function Input() {
           <br />
 
         </form>
+        </div>
+        <div className="gridCombo">
         {optionsStateValue && gridOptionsStateValues}
         {comboStateValue && comboOptionsValue}
-      </div>
+
+        </div>
+      
     </div>
   );
 }
