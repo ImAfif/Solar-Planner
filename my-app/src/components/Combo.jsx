@@ -25,10 +25,10 @@ export default function Combo(props) {
           <h5>  Total number of solar panels needed for the power plant = {allNumberOfModules}</h5>
         </li>
         <li>
-          <h5>  Solar panels in series or number of strings = {seriesModules}</h5>
+          <h5>  Solar panels in series = {seriesModules}</h5>
         </li>
         <li>
-          <h5>  Total number of solar panels in parallel or number of solar panels in a string = {modulesInParallel}</h5>
+          <h5>  Total number of solar panels in parallel = {modulesInParallel}</h5>
         </li>
         <li>
           <h5>  Combination Price in $ = {totalComboPrice}</h5>
