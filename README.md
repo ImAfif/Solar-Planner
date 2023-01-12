@@ -1,6 +1,6 @@
 ## Solar-Planner
 
-A web application to calculate and design a houshold rooftop solar power plant. 
+A web application to calculate and design a houshold rooftop solar power plant. Built in front-end : react, back-end : Node, Express and DB : PostgreSQL 
 
 
 ## Features 
